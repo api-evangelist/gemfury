@@ -1,0 +1,52 @@
+{
+  "@context": {
+    "@vocab": "https://gemfury.com/api/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+
+    "Package": "https://gemfury.com/api/vocab#Package",
+    "Version": "https://gemfury.com/api/vocab#Version",
+    "Account": "https://gemfury.com/api/vocab#Account",
+    "Member": "https://gemfury.com/api/vocab#Member",
+    "Token": "https://gemfury.com/api/vocab#Token",
+
+    "id": "@id",
+    "type_key": "@type",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "email": "schema:email",
+    "username": "https://gemfury.com/api/vocab#username",
+    "kind_key": "https://gemfury.com/api/vocab#kindKey",
+    "private": "https://gemfury.com/api/vocab#private",
+    "version_count": "https://gemfury.com/api/vocab#versionCount",
+    "release_version": "https://gemfury.com/api/vocab#releaseVersion",
+    "latest_version": "https://gemfury.com/api/vocab#latestVersion",
+    "version": "https://gemfury.com/api/vocab#version",
+    "prerelease": "https://gemfury.com/api/vocab#prerelease",
+    "package_id": "https://gemfury.com/api/vocab#packageId",
+    "filename": "https://gemfury.com/api/vocab#filename",
+    "digests": "https://gemfury.com/api/vocab#digests",
+    "download_url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "role": "https://gemfury.com/api/vocab#role",
+    "state": "https://gemfury.com/api/vocab#state",
+    "assignee_id": "https://gemfury.com/api/vocab#assigneeId",
+    "packages": "https://gemfury.com/api/vocab#packages",
+    "versions": "https://gemfury.com/api/vocab#versions",
+    "members": "https://gemfury.com/api/vocab#members",
+    "tokens": "https://gemfury.com/api/vocab#tokens",
+    "collaborations": "https://gemfury.com/api/vocab#collaborations",
+    "total": "https://gemfury.com/api/vocab#total",
+    "page": "https://gemfury.com/api/vocab#page",
+    "per_page": "https://gemfury.com/api/vocab#perPage",
+    "error": "https://gemfury.com/api/vocab#error",
+    "message": "schema:message"
+  }
+}

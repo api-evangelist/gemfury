@@ -1,0 +1,6 @@
+{
+  "error": {
+    "message": "Package not found",
+    "type": "NotFoundException"
+  }
+}

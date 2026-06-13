@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.fury.io/schemas/version",
+  "title": "Version",
+  "description": "A specific version of a package hosted on Gemfury",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the version",
+      "pattern": "^ver_[a-z0-9]+$",
+      "example": "ver_eb3c12"
+    },
+    "name": {
+      "type": "string",
+      "description": "Package name",
+      "example": "express"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version string",
+      "example": "4.18.2"
+    },
+    "prerelease": {
+      "type": "boolean",
+      "description": "Whether this is a prerelease version",
+      "example": false
+    },
+    "package_id": {
+      "type": "string",
+      "description": "ID of the parent package",
+      "pattern": "^pkg_[a-z0-9]+$",
+      "example": "pkg_eb3c12"
+    },
+    "kind_key": {
+      "type": "string",
+      "description": "Package ecosystem key",
+      "enum": ["gem", "js", "pip", "composer", "nuget", "go", "maven", "deb", "rpm", "bower", "crate"],
+      "example": "js"
+    },
+    "filename": {
+      "type": "string",
+      "description": "File name of the package artifact",
+      "example": "express-4.18.2.tgz"
+    },
+    "digests": {
+      "type": "object",
+      "description": "Cryptographic hashes of the package artifact",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "sha256": "abc123def456"
+      }
+    },
+    "download_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Direct download URL for the package artifact",
+      "example": "https://cdn.fury.io/example/express-4.18.2.tgz"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the version was uploaded",
+      "example": "2023-01-15T12:00:00Z"
+    }
+  },
+  "required": ["id", "name", "version", "prerelease", "package_id", "kind_key"],
+  "additionalProperties": false
+}

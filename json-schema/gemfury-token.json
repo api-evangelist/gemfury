@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.fury.io/schemas/token",
+  "title": "Token",
+  "description": "An API authentication token for Gemfury",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique token identifier",
+      "pattern": "^tok_[a-z0-9]+$",
+      "example": "tok_eb3c12"
+    },
+    "kind_key": {
+      "type": "string",
+      "description": "Token permission level",
+      "enum": ["pull", "push"],
+      "example": "pull"
+    },
+    "state": {
+      "type": "string",
+      "description": "Token state",
+      "enum": ["active", "inactive"],
+      "example": "active"
+    },
+    "assignee_id": {
+      "type": "string",
+      "description": "ID of the user the token is assigned to",
+      "example": "acct_eb3c12"
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Human-readable label for the token",
+      "example": "CI deploy token"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the token was created",
+      "example": "2023-01-15T12:00:00Z"
+    }
+  },
+  "required": ["id", "kind_key", "state", "assignee_id"],
+  "additionalProperties": false
+}

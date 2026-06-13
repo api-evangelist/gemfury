@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.fury.io/schemas/package",
+  "title": "Package",
+  "description": "A package hosted on Gemfury",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the package",
+      "pattern": "^pkg_[a-z0-9]+$",
+      "example": "pkg_eb3c12"
+    },
+    "name": {
+      "type": "string",
+      "description": "Package name",
+      "example": "express"
+    },
+    "kind_key": {
+      "type": "string",
+      "description": "Package type/ecosystem key",
+      "enum": ["gem", "js", "pip", "composer", "nuget", "go", "maven", "deb", "rpm", "bower", "crate"],
+      "example": "js"
+    },
+    "private": {
+      "type": "boolean",
+      "description": "Whether the package is private",
+      "example": true
+    },
+    "version_count": {
+      "type": "integer",
+      "description": "Total number of versions",
+      "minimum": 0,
+      "example": 5
+    },
+    "release_version": {
+      "type": ["string", "null"],
+      "description": "Latest stable (non-prerelease) version",
+      "example": "4.18.2"
+    },
+    "latest_version": {
+      "type": ["string", "null"],
+      "description": "Latest version including prereleases",
+      "example": "4.18.2"
+    }
+  },
+  "required": ["id", "name", "kind_key", "private"],
+  "additionalProperties": false
+}

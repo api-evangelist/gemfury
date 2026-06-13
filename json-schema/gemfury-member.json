@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.fury.io/schemas/member",
+  "title": "Member",
+  "description": "A collaborator member on a Gemfury account",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique member identifier",
+      "example": "acct_eb3c12"
+    },
+    "username": {
+      "type": "string",
+      "description": "Member's username",
+      "example": "collab-name"
+    },
+    "name": {
+      "type": "string",
+      "description": "Member's display name",
+      "example": "Jane Doe"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Member's email address",
+      "example": "jane@example.com"
+    },
+    "role": {
+      "type": "string",
+      "description": "Member's permission level",
+      "enum": ["pull", "push", "owner"],
+      "example": "push"
+    }
+  },
+  "required": ["id", "username", "role"],
+  "additionalProperties": false
+}

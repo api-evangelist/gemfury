@@ -39,6 +39,8 @@ apis:
         url: https://gemfury.com/guide/api/
       - type: Quickstart
         url: https://gemfury.com/guide/api/quickstart/
+      - type: OpenAPI
+        url: openapi/gemfury-gemfury-api-openapi.yml
 common:
   - type: Website
     url: https://gemfury.com

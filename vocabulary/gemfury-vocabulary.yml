@@ -1,0 +1,130 @@
+vocabulary:
+  name: Gemfury API Vocabulary
+  description: Domain terms and concepts used in the Gemfury Developer API
+  url: https://gemfury.com/guide/api/
+  terms:
+
+    - term: package
+      label: Package
+      description: >
+        A named artifact hosted on Gemfury. A package may have multiple versions
+        and belongs to a single package ecosystem (kind_key).
+      type: resource
+      schema: json-schema/gemfury-package.json
+
+    - term: version
+      label: Version
+      description: >
+        A specific release of a package identified by its version string.
+        Each version has a unique artifact file and cryptographic digests.
+      type: resource
+      schema: json-schema/gemfury-version.json
+
+    - term: account
+      label: Account
+      description: >
+        A Gemfury user, organization, or Heroku app account that owns repositories
+        and packages.
+      type: resource
+      schema: json-schema/gemfury-account.json
+
+    - term: member
+      label: Member
+      description: >
+        A collaborator who has been granted access to an account's repository
+        with a specific role (pull, push, or owner).
+      type: resource
+      schema: json-schema/gemfury-member.json
+
+    - term: token
+      label: Token
+      description: >
+        An API authentication credential scoped to pull or push operations,
+        assigned to a specific user account.
+      type: resource
+      schema: json-schema/gemfury-token.json
+
+    - term: kind_key
+      label: Kind Key
+      description: >
+        A short string identifier for a package ecosystem supported by Gemfury.
+      type: property
+      values:
+        - value: gem
+          label: Ruby Gem
+        - value: js
+          label: npm (JavaScript)
+        - value: pip
+          label: PyPI (Python)
+        - value: composer
+          label: Composer (PHP)
+        - value: nuget
+          label: NuGet (.NET)
+        - value: go
+          label: Go Modules
+        - value: maven
+          label: Maven (Java)
+        - value: deb
+          label: Debian Package
+        - value: rpm
+          label: RPM Package
+        - value: bower
+          label: Bower
+        - value: crate
+          label: Rust Crate
+
+    - term: role
+      label: Role
+      description: >
+        The permission level granted to a collaborator or token.
+      type: property
+      values:
+        - value: pull
+          label: Pull
+          description: Read-only access to download packages
+        - value: push
+          label: Push
+          description: Read and write access to upload and manage packages
+        - value: owner
+          label: Owner
+          description: Full administrative access including member management
+
+    - term: prerelease
+      label: Prerelease
+      description: >
+        Indicates whether a version is a prerelease (e.g. alpha, beta, rc)
+        and should not be treated as the stable release version.
+      type: property
+
+    - term: as
+      label: As (Account Context)
+      description: >
+        A query parameter used to impersonate or switch context to a specific
+        account when the authenticated user has access to multiple accounts.
+      type: parameter
+
+    - term: digests
+      label: Digests
+      description: >
+        A map of cryptographic hash algorithm names (e.g. sha256) to their
+        corresponding hash values for a package version artifact.
+      type: property
+
+    - term: collaboration
+      label: Collaboration
+      description: >
+        An account where the authenticated user has been granted collaborator
+        access with a specific role.
+      type: concept
+
+    - term: release_version
+      label: Release Version
+      description: >
+        The latest stable (non-prerelease) version of a package.
+      type: property
+
+    - term: latest_version
+      label: Latest Version
+      description: >
+        The most recently published version of a package, including prereleases.
+      type: property

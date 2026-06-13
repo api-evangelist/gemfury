@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.fury.io/schemas/account",
+  "title": "Account",
+  "description": "A Gemfury account (user, organization, or Heroku app)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique account identifier",
+      "pattern": "^acct_[a-z0-9]+$",
+      "example": "acct_eb3c12"
+    },
+    "username": {
+      "type": "string",
+      "description": "Unique username",
+      "example": "nickfury"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name",
+      "example": "Nick Fury"
+    },
+    "type_key": {
+      "type": "string",
+      "description": "Account type",
+      "enum": ["user", "org", "heroku_app"],
+      "example": "user"
+    }
+  },
+  "required": ["id", "username", "type_key"],
+  "additionalProperties": false
+}
