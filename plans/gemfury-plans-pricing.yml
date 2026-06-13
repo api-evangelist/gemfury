@@ -1,0 +1,323 @@
+specificationVersion: '0.1'
+id: gemfury-plans-pricing
+name: Gemfury Plans and Pricing
+description: Pricing plans for Gemfury private package repository service covering public, personal, team, and enterprise tiers.
+url: https://fury.co/pricing/
+currency: USD
+plans:
+  - name: Public
+    description: Free plan for public packages with unlimited collaborators but no private packages.
+    url: https://fury.co/pricing/
+    price: 0
+    unit: month
+    features:
+      - name: Collaborators
+        description: Unlimited collaborators
+        value: unlimited
+      - name: Private Packages
+        description: Private package hosting
+        value: '0'
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+
+  - name: Personal 1C
+    description: Personal plan for individual developers with 1 collaborator and unlimited private packages.
+    url: https://fury.co/pricing/
+    price: 9
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: '1'
+      - name: Private Packages
+        description: Private package hosting
+        value: unlimited
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Personal 5C
+    description: Personal plan with 5 collaborators and unlimited private packages.
+    url: https://fury.co/pricing/
+    price: 14
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: '5'
+      - name: Private Packages
+        description: Private package hosting
+        value: unlimited
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Personal 10C
+    description: Personal plan with 10 collaborators and unlimited private packages.
+    url: https://fury.co/pricing/
+    price: 23
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: '10'
+      - name: Private Packages
+        description: Private package hosting
+        value: unlimited
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Personal 25C
+    description: Personal plan with 25 collaborators and unlimited private packages.
+    url: https://fury.co/pricing/
+    price: 50
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: '25'
+      - name: Private Packages
+        description: Private package hosting
+        value: unlimited
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Personal 50C
+    description: Personal plan with 50 collaborators and unlimited private packages.
+    url: https://fury.co/pricing/
+    price: 100
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: '50'
+      - name: Private Packages
+        description: Private package hosting
+        value: unlimited
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Team 10P
+    description: Team plan with unlimited collaborators and 10 private packages.
+    url: https://fury.co/pricing/
+    price: 25
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: unlimited
+      - name: Private Packages
+        description: Private package hosting
+        value: '10'
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Team 20P
+    description: Team plan with unlimited collaborators and 20 private packages.
+    url: https://fury.co/pricing/
+    price: 50
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: unlimited
+      - name: Private Packages
+        description: Private package hosting
+        value: '20'
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Team 50P
+    description: Team plan with unlimited collaborators and 50 private packages.
+    url: https://fury.co/pricing/
+    price: 100
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: unlimited
+      - name: Private Packages
+        description: Private package hosting
+        value: '50'
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Team 125P
+    description: Team plan with unlimited collaborators and 125 private packages.
+    url: https://fury.co/pricing/
+    price: 200
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: unlimited
+      - name: Private Packages
+        description: Private package hosting
+        value: '125'
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Team 200P
+    description: Team plan with unlimited collaborators and 200 private packages.
+    url: https://fury.co/pricing/
+    price: 300
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: unlimited
+      - name: Private Packages
+        description: Private package hosting
+        value: '200'
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Team 300P
+    description: Team plan with unlimited collaborators and 300 private packages.
+    url: https://fury.co/pricing/
+    price: 450
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: unlimited
+      - name: Private Packages
+        description: Private package hosting
+        value: '300'
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Team 450P
+    description: Team plan with unlimited collaborators and 450 private packages.
+    url: https://fury.co/pricing/
+    price: 650
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: unlimited
+      - name: Private Packages
+        description: Private package hosting
+        value: '450'
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+
+  - name: Enterprise
+    description: Custom enterprise plan with separate billing, multi-ownership, and fine-grained permission control for large organizations. Contact hello@gemfury.com for pricing.
+    url: https://fury.co/pricing/
+    price: 0
+    unit: month
+    features:
+      - name: Collaborators
+        description: Number of collaborators allowed
+        value: custom
+      - name: Private Packages
+        description: Private package hosting
+        value: custom
+      - name: Public Packages
+        description: Public package hosting
+        value: unlimited
+      - name: SSL Protection
+        description: SSL encrypted package delivery
+        value: 'true'
+      - name: Versions
+        description: Package version storage
+        value: unlimited
+      - name: Separate Billing
+        description: Separate billing for organizations
+        value: 'true'
+      - name: Multi-Ownership
+        description: Multiple account ownership support
+        value: 'true'
+      - name: Fine-Grained Permissions
+        description: Fine-grained permission control for members
+        value: 'true'
+      - name: SAML SSO
+        description: SAML Single Sign-On support
+        value: 'true'

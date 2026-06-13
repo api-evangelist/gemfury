@@ -1,0 +1,85 @@
+specificationVersion: '1.0'
+id: gemfury-finops
+name: Gemfury FinOps Framework
+description: FinOps cost optimization and governance guidance for Gemfury private package repository usage across teams and organizations.
+url: https://fury.co/pricing/
+focus:
+  - name: Understand
+    description: Gain visibility into Gemfury spending and usage patterns across teams.
+    capabilities:
+      - name: Cost Allocation
+        description: Track Gemfury subscription costs by team, department, or project using account-level billing and collaborator management.
+        actions:
+          - Use Gemfury's account management to assign packages to teams or projects.
+          - Monitor active collaborator counts relative to plan limits.
+          - Track private package counts approaching plan thresholds.
+      - name: Usage Analytics
+        description: Monitor API usage and package consumption to understand demand patterns.
+        actions:
+          - Review package download frequency to identify unused private packages.
+          - Track version accumulation to manage storage needs.
+          - Audit collaborator access to remove inactive members reducing per-seat costs.
+
+  - name: Optimize
+    description: Reduce Gemfury costs by right-sizing plans and eliminating waste.
+    capabilities:
+      - name: Right-Sizing
+        description: Select the appropriate Gemfury plan based on actual collaborator and private package usage.
+        actions:
+          - Audit private package count monthly and downgrade plans if below thresholds.
+          - Choose between Personal (collaborator-limited) and Team (package-limited) plans based on growth trajectory.
+          - Consolidate multiple personal accounts into team accounts for organizations.
+        recommendations:
+          - Personal plans are cost-effective for small teams needing unlimited private packages with few collaborators.
+          - Team plans suit organizations with many contributors but a bounded package catalog.
+          - Avoid over-provisioning collaborator slots beyond active monthly users.
+      - name: Waste Elimination
+        description: Remove unused packages, stale versions, and inactive collaborators to stay within plan limits and avoid upgrades.
+        actions:
+          - Delete deprecated package versions using the Versions API (DELETE /1/gems/:name/versions/:version).
+          - Remove inactive collaborators who no longer need repository access.
+          - Archive or delete packages no longer under active development.
+      - name: Plan Selection
+        description: Choose the most cost-effective plan tier.
+        tiers:
+          - tier: Public (Free)
+            recommended_for: Open source projects with no private packages.
+            monthly_cost: 0
+          - tier: Personal 1C ($9/mo)
+            recommended_for: Solo developers with private packages.
+            monthly_cost: 9
+          - tier: Personal 5C ($14/mo)
+            recommended_for: Small teams up to 5 members.
+            monthly_cost: 14
+          - tier: Team 10P ($25/mo)
+            recommended_for: Large teams with a small private package catalog (up to 10).
+            monthly_cost: 25
+          - tier: Team 50P ($100/mo)
+            recommended_for: Mid-size organizations with up to 50 private packages.
+            monthly_cost: 100
+          - tier: Enterprise
+            recommended_for: Large organizations needing SAML SSO, multi-ownership, and custom limits.
+            monthly_cost: custom
+
+  - name: Operate
+    description: Establish governance and operational practices for sustainable Gemfury usage.
+    capabilities:
+      - name: Cost Governance
+        description: Implement policies to control Gemfury spending over time.
+        actions:
+          - Designate an account owner responsible for plan reviews on a quarterly basis.
+          - Implement a package lifecycle policy to deprecate and remove old packages.
+          - Use API tokens with minimum required scopes to enforce least-privilege access.
+          - Review collaborator roster quarterly and remove off-boarded team members.
+      - name: Automation
+        description: Use the Gemfury REST API and CLI to automate package management and reduce manual overhead.
+        actions:
+          - Automate package publishing via CI/CD pipelines using the fury CLI.
+          - Use the Gemfury Developer API (https://api.fury.io) to programmatically manage packages, versions, and tokens.
+          - Integrate Gemfury status monitoring (https://status.fury.co/) into operational dashboards.
+      - name: Budgeting
+        description: Forecast and budget for Gemfury costs based on team growth.
+        actions:
+          - Set a budget alert when collaborator or package counts approach plan upgrade thresholds.
+          - Factor in 14-day trial period when evaluating new plan tiers before committing.
+          - Negotiate enterprise discounts when package or collaborator volumes exceed Team 450P limits.

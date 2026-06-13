@@ -1,0 +1,30 @@
+specificationVersion: '0.1'
+id: gemfury-rate-limits
+name: Gemfury API Rate Limits
+description: Rate limit policies for the Gemfury Developer API. Gemfury does not publicly document specific rate limit thresholds but enforces fair-use policies on API requests to ensure platform stability.
+url: https://gemfury.com/guide/api/
+limits:
+  - name: API Request Limit
+    description: Gemfury enforces fair-use rate limits on API requests. Specific numerical thresholds are not publicly documented. Clients should implement exponential backoff when receiving 429 Too Many Requests responses.
+    scope: account
+    unit: requests
+    window: minute
+    limit: undisclosed
+    overage: block
+    headers:
+      - name: Retry-After
+        description: Number of seconds to wait before retrying after a rate limit response
+        required: false
+  - name: Package Upload Limit
+    description: Package uploads are subject to fair-use limits based on the account plan. Higher-tier plans support larger upload volumes.
+    scope: account
+    unit: uploads
+    window: day
+    limit: undisclosed
+    overage: block
+notes:
+  - Gemfury does not publicly publish specific rate limit numbers.
+  - Clients receiving HTTP 429 responses should implement exponential backoff with jitter.
+  - Enterprise customers may negotiate higher rate limits via hello@gemfury.com.
+  - The API uses versioning (current version 1) via path prefix /1/ or X-Fury-Api-Version header.
+  - All API requests must be made over HTTPS to https://api.fury.io.

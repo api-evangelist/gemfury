@@ -1,0 +1,73 @@
+aid: gemfury
+name: Gemfury
+description: Gemfury is a private package repository service with a REST API for pushing and managing gems, npm, pip, composer, and other language packages for teams and organizations. It supports Gem, npm, PyPI, Go Modules, Composer, Maven, DEB, RPM, Bower, NuGet, and Rust Crates.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/gemfury/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Package Repository
+  - Private Packages
+  - Gem
+  - npm
+  - PyPI
+  - Composer
+  - NuGet
+  - Go Modules
+  - Maven
+  - DEB
+  - RPM
+  - Bower
+  - Rust Crates
+  - Developer Tools
+apis:
+  - aid: gemfury:gemfury-api
+    name: Gemfury Developer API
+    description: REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://gemfury.com/guide/api/
+    baseURL: https://api.fury.io
+    tags:
+      - Package Management
+      - Private Repository
+      - Versioning
+      - Collaboration
+    properties:
+      - type: Documentation
+        url: https://gemfury.com/guide/api/
+      - type: Quickstart
+        url: https://gemfury.com/guide/api/quickstart/
+common:
+  - type: Website
+    url: https://gemfury.com
+  - type: Documentation
+    url: https://gemfury.com/help/
+  - type: GitHubOrg
+    url: https://github.com/gemfury
+  - type: Blog
+    url: https://fury.blog/
+  - type: Changelog
+    url: https://fury.blog/changelog
+  - type: Pricing
+    url: https://fury.co/pricing/
+  - type: StatusPage
+    url: https://status.fury.co/
+  - type: X
+    url: https://x.com/Gemfury
+  - type: CLI
+    url: https://gemfury.com/guide/cli/
+  - type: GitHubRepository
+    url: https://github.com/gemfury/gemfury
+  - type: GitHubRepository
+    url: https://github.com/gemfury/cli
+  - type: Plans
+    url: plans/gemfury-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gemfury-rate-limits.yml
+  - type: FinOps
+    url: finops/gemfury-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
