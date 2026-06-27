@@ -2,6 +2,13 @@
   "repo": "gemfury",
   "feeds": [
     {
+      "source": "https://fury.blog/rss/",
+      "feed_url": "https://fury.blog/rss/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://github.com/gemfury",
       "feed_url": "https://github.com/gemfury",
       "title": "",
@@ -10,5 +17,5 @@
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:03:07Z"
 }

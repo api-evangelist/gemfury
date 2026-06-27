@@ -37,7 +37,7 @@ apis:
     properties:
       - type: Documentation
         url: https://gemfury.com/guide/api/
-      - type: Quickstart
+      - type: GettingStarted
         url: https://gemfury.com/guide/api/quickstart/
       - type: OpenAPI
         url: openapi/gemfury-gemfury-api-openapi.yml
@@ -50,7 +50,7 @@ common:
     url: https://github.com/gemfury
   - type: Blog
     url: https://fury.blog/
-  - type: Changelog
+  - type: ChangeLog
     url: https://fury.blog/changelog
   - type: Pricing
     url: https://fury.co/pricing/
