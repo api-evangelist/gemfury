@@ -42,6 +42,10 @@ apis:
       - type: OpenAPI
         url: openapi/gemfury-gemfury-api-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/gemfury-domain-security.yml
+  - type: Authentication
+    url: authentication/gemfury-authentication.yml
   - type: Website
     url: https://gemfury.com
   - type: Documentation
