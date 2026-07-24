@@ -1,0 +1,259 @@
+openapi: 3.0.3
+info:
+  title: Gemfury Developer Accounts Tokens API
+  description: 'REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.
+
+    '
+  version: '1'
+  contact:
+    name: Gemfury Support
+    url: https://gemfury.com/help/
+  license:
+    name: Proprietary
+    url: https://gemfury.com
+servers:
+- url: https://api.fury.io/1
+  description: Gemfury API v1
+security:
+- bearerAuth: []
+tags:
+- name: Tokens
+  description: Manage API tokens
+paths:
+  /tokens:
+    get:
+      operationId: listTokens
+      summary: List Tokens
+      description: Retrieve a paginated list of tokens for the account.
+      tags:
+      - Tokens
+      parameters:
+      - $ref: '#/components/parameters/asParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/perPageParam'
+      responses:
+        '200':
+          description: Paginated list of tokens
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tokens:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Token'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+              example:
+                tokens:
+                - id: tok_eb3c12
+                  kind_key: pull
+                  state: active
+                  assignee_id: acct_eb3c12
+                  description: CI deploy token
+                  created_at: '2023-01-15T12:00:00Z'
+                total: 1
+                page: 1
+                per_page: 20
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createToken
+      summary: Create Token
+      description: Create a new authentication token for the account.
+      tags:
+      - Tokens
+      parameters:
+      - name: kind_key
+        in: query
+        description: 'Permission level: pull or push'
+        required: true
+        schema:
+          type: string
+          enum:
+          - pull
+          - push
+      - name: assignee_id
+        in: query
+        description: Username or ID of the user receiving the token
+        required: true
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: Human-readable label for the token
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/asParam'
+      responses:
+        '201':
+          description: Token created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /tokens/{id}:
+    delete:
+      operationId: deleteToken
+      summary: Delete Token
+      description: Remove a token by its identifier.
+      tags:
+      - Tokens
+      parameters:
+      - name: id
+        in: path
+        description: Unique token identifier
+        required: true
+        schema:
+          type: string
+        example: tok_eb3c12
+      - $ref: '#/components/parameters/asParam'
+      responses:
+        '204':
+          description: Token deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    perPageParam:
+      name: per_page
+      in: query
+      description: Number of items per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    pageParam:
+      name: page
+      in: query
+      description: Page number for pagination
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    asParam:
+      name: as
+      in: query
+      description: Account context override (username or account ID)
+      required: false
+      schema:
+        type: string
+      example: nickfury
+  schemas:
+    Error:
+      type: object
+      description: Error response
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Human-readable error message
+              example: Package not found
+            type:
+              type: string
+              description: Error class categorization
+              example: InputException
+    Token:
+      type: object
+      description: An API authentication token
+      properties:
+        id:
+          type: string
+          description: Unique token identifier
+          example: tok_eb3c12
+        kind_key:
+          type: string
+          description: Token permission level
+          enum:
+          - pull
+          - push
+          example: pull
+        state:
+          type: string
+          description: Token state
+          enum:
+          - active
+          - inactive
+          example: active
+        assignee_id:
+          type: string
+          description: ID of the user the token is assigned to
+          example: acct_eb3c12
+        description:
+          type: string
+          description: Human-readable label for the token
+          example: CI deploy token
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the token was created
+          example: '2023-01-15T12:00:00Z'
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Authentication required
+              type: AuthException
+    BadRequest:
+      description: Bad request, usually an input error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid kind_key value
+              type: InputException
+    NotFound:
+      description: Referenced object not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Package not found
+              type: NotFoundException
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API token obtained from the Gemfury dashboard

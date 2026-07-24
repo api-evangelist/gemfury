@@ -1,0 +1,320 @@
+openapi: 3.0.3
+info:
+  title: Gemfury Developer Accounts Versions API
+  description: 'REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.
+
+    '
+  version: '1'
+  contact:
+    name: Gemfury Support
+    url: https://gemfury.com/help/
+  license:
+    name: Proprietary
+    url: https://gemfury.com
+servers:
+- url: https://api.fury.io/1
+  description: Gemfury API v1
+security:
+- bearerAuth: []
+tags:
+- name: Versions
+  description: Manage package versions
+paths:
+  /packages/{id}/versions:
+    get:
+      operationId: listPackageVersions
+      summary: List Package Versions
+      description: Retrieve a paginated list of all versions for a specific package.
+      tags:
+      - Versions
+      parameters:
+      - $ref: '#/components/parameters/packageId'
+      - $ref: '#/components/parameters/asParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/perPageParam'
+      responses:
+        '200':
+          description: Paginated list of versions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  versions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Version'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+              example:
+                versions:
+                - id: ver_eb3c12
+                  name: express
+                  version: 4.18.2
+                  prerelease: false
+                  package_id: pkg_eb3c12
+                  kind_key: js
+                  filename: express-4.18.2.tgz
+                  digests:
+                    sha256: abc123
+                  download_url: https://cdn.fury.io/example/express-4.18.2.tgz
+                  created_at: '2023-01-15T12:00:00Z'
+                total: 1
+                page: 1
+                per_page: 20
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /versions:
+    get:
+      operationId: listVersions
+      summary: List Filtered Versions
+      description: Retrieve a filtered, paginated list of versions by package name and/or version string.
+      tags:
+      - Versions
+      parameters:
+      - name: name
+        in: query
+        description: Package name or KIND:NAME format
+        required: false
+        schema:
+          type: string
+        example: express
+      - name: version
+        in: query
+        description: Version string to filter by
+        required: false
+        schema:
+          type: string
+        example: 1.2.3
+      - $ref: '#/components/parameters/asParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/perPageParam'
+      responses:
+        '200':
+          description: Paginated list of matching versions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  versions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Version'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /versions/{id}:
+    get:
+      operationId: getVersion
+      summary: Retrieve Version
+      description: Retrieve details about a specific package version.
+      tags:
+      - Versions
+      parameters:
+      - $ref: '#/components/parameters/versionId'
+      - $ref: '#/components/parameters/asParam'
+      responses:
+        '200':
+          description: Version details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+              example:
+                id: ver_eb3c12
+                name: express
+                version: 4.18.2
+                prerelease: false
+                package_id: pkg_eb3c12
+                kind_key: js
+                filename: express-4.18.2.tgz
+                digests:
+                  sha256: abc123
+                download_url: https://cdn.fury.io/example/express-4.18.2.tgz
+                created_at: '2023-01-15T12:00:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteVersion
+      summary: Delete Version
+      description: Delete a specific package version.
+      tags:
+      - Versions
+      parameters:
+      - $ref: '#/components/parameters/versionId'
+      - $ref: '#/components/parameters/asParam'
+      responses:
+        '204':
+          description: Version deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Version:
+      type: object
+      description: A specific version of a package
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the version
+          example: ver_eb3c12
+        name:
+          type: string
+          description: Package name
+          example: express
+        version:
+          type: string
+          description: Version string
+          example: 4.18.2
+        prerelease:
+          type: boolean
+          description: Whether this is a prerelease version
+          example: false
+        package_id:
+          type: string
+          description: ID of the parent package
+          example: pkg_eb3c12
+        kind_key:
+          type: string
+          description: Package ecosystem key
+          example: js
+        filename:
+          type: string
+          description: File name of the package artifact
+          example: express-4.18.2.tgz
+        digests:
+          type: object
+          description: Cryptographic hashes of the package artifact
+          additionalProperties:
+            type: string
+          example:
+            sha256: abc123def456
+        download_url:
+          type: string
+          format: uri
+          description: Direct download URL for the package artifact
+          example: https://cdn.fury.io/example/express-4.18.2.tgz
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the version was uploaded
+          example: '2023-01-15T12:00:00Z'
+    Error:
+      type: object
+      description: Error response
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Human-readable error message
+              example: Package not found
+            type:
+              type: string
+              description: Error class categorization
+              example: InputException
+  parameters:
+    perPageParam:
+      name: per_page
+      in: query
+      description: Number of items per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    pageParam:
+      name: page
+      in: query
+      description: Page number for pagination
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    versionId:
+      name: id
+      in: path
+      description: Unique version identifier
+      required: true
+      schema:
+        type: string
+      example: ver_eb3c12
+    asParam:
+      name: as
+      in: query
+      description: Account context override (username or account ID)
+      required: false
+      schema:
+        type: string
+      example: nickfury
+    packageId:
+      name: id
+      in: path
+      description: Unique package identifier or KIND:NAME format (e.g. js:express)
+      required: true
+      schema:
+        type: string
+      example: pkg_eb3c12
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Authentication required
+              type: AuthException
+    NotFound:
+      description: Referenced object not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Package not found
+              type: NotFoundException
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API token obtained from the Gemfury dashboard

@@ -1,0 +1,237 @@
+openapi: 3.0.3
+info:
+  title: Gemfury Developer Accounts Packages API
+  description: 'REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.
+
+    '
+  version: '1'
+  contact:
+    name: Gemfury Support
+    url: https://gemfury.com/help/
+  license:
+    name: Proprietary
+    url: https://gemfury.com
+servers:
+- url: https://api.fury.io/1
+  description: Gemfury API v1
+security:
+- bearerAuth: []
+tags:
+- name: Packages
+  description: Manage packages in a Gemfury repository
+paths:
+  /packages:
+    get:
+      operationId: listPackages
+      summary: List Packages
+      description: Retrieve a paginated list of all packages in the account.
+      tags:
+      - Packages
+      parameters:
+      - $ref: '#/components/parameters/asParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/perPageParam'
+      responses:
+        '200':
+          description: Paginated list of packages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  packages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Package'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+              example:
+                packages:
+                - id: pkg_eb3c12
+                  name: express
+                  kind_key: js
+                  private: true
+                  version_count: 5
+                  release_version: 4.18.2
+                  latest_version: 4.18.2
+                total: 1
+                page: 1
+                per_page: 20
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /packages/{id}:
+    get:
+      operationId: getPackage
+      summary: Retrieve Package
+      description: Retrieve details about a specific package by ID or KIND:NAME.
+      tags:
+      - Packages
+      parameters:
+      - $ref: '#/components/parameters/packageId'
+      - $ref: '#/components/parameters/asParam'
+      responses:
+        '200':
+          description: Package details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Package'
+              example:
+                id: pkg_eb3c12
+                name: express
+                kind_key: js
+                private: true
+                version_count: 5
+                release_version: 4.18.2
+                latest_version: 4.18.2
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePackage
+      summary: Delete Package
+      description: Delete a package and all its versions.
+      tags:
+      - Packages
+      parameters:
+      - $ref: '#/components/parameters/packageId'
+      - $ref: '#/components/parameters/asParam'
+      responses:
+        '204':
+          description: Package deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    perPageParam:
+      name: per_page
+      in: query
+      description: Number of items per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    pageParam:
+      name: page
+      in: query
+      description: Page number for pagination
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    asParam:
+      name: as
+      in: query
+      description: Account context override (username or account ID)
+      required: false
+      schema:
+        type: string
+      example: nickfury
+    packageId:
+      name: id
+      in: path
+      description: Unique package identifier or KIND:NAME format (e.g. js:express)
+      required: true
+      schema:
+        type: string
+      example: pkg_eb3c12
+  schemas:
+    Error:
+      type: object
+      description: Error response
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Human-readable error message
+              example: Package not found
+            type:
+              type: string
+              description: Error class categorization
+              example: InputException
+    Package:
+      type: object
+      description: A package hosted on Gemfury
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the package
+          example: pkg_eb3c12
+        name:
+          type: string
+          description: Package name
+          example: express
+        kind_key:
+          type: string
+          description: Package type/ecosystem key (e.g. gem, js, pip, composer, nuget)
+          example: js
+        private:
+          type: boolean
+          description: Whether the package is private
+          example: true
+        version_count:
+          type: integer
+          description: Total number of versions
+          example: 5
+        release_version:
+          type: string
+          description: Latest stable (non-prerelease) version
+          example: 4.18.2
+        latest_version:
+          type: string
+          description: Latest version including prereleases
+          example: 4.18.2
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Authentication required
+              type: AuthException
+    NotFound:
+      description: Referenced object not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Package not found
+              type: NotFoundException
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API token obtained from the Gemfury dashboard
