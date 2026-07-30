@@ -2,7 +2,20 @@ aid: gemfury
 name: Gemfury
 description: Gemfury is a private package repository service with a REST API for pushing and managing gems, npm, pip, composer, and other language packages for teams and organizations. It supports Gem, npm, PyPI, Go Modules, Composer, Maven, DEB, RPM, Bower, NuGet, and Rust Crates.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/gemfury.png
 url: https://raw.githubusercontent.com/api-evangelist/gemfury/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -23,24 +36,76 @@ tags:
   - Rust Crates
   - Developer Tools
 apis:
-  - aid: gemfury:gemfury-api
-    name: Gemfury Developer API
-    description: REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://gemfury.com/guide/api/
-    baseURL: https://api.fury.io
-    tags:
-      - Package Management
-      - Private Repository
-      - Versioning
-      - Collaboration
-    properties:
-      - type: Documentation
-        url: https://gemfury.com/guide/api/
-      - type: GettingStarted
-        url: https://gemfury.com/guide/api/quickstart/
-      - type: OpenAPI
-        url: openapi/gemfury-gemfury-api-openapi.yml
+- aid: gemfury:gemfury-accounts-api
+  name: Gemfury Accounts API
+  description: Retrieve account information
+  humanURL: https://gemfury.com/guide/api/
+  baseURL: https://api.fury.io
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/gemfury-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://gemfury.com/guide/api/
+  - type: GettingStarted
+    url: https://gemfury.com/guide/api/quickstart/
+- aid: gemfury:gemfury-members-api
+  name: Gemfury Members API
+  description: Manage collaborators and members
+  humanURL: https://gemfury.com/guide/api/
+  baseURL: https://api.fury.io
+  tags:
+  - Members
+  properties:
+  - type: OpenAPI
+    url: openapi/gemfury-members-api-openapi.yml
+  - type: Documentation
+    url: https://gemfury.com/guide/api/
+  - type: GettingStarted
+    url: https://gemfury.com/guide/api/quickstart/
+- aid: gemfury:gemfury-packages-api
+  name: Gemfury Packages API
+  description: Manage packages in a Gemfury repository
+  humanURL: https://gemfury.com/guide/api/
+  baseURL: https://api.fury.io
+  tags:
+  - Packages
+  properties:
+  - type: OpenAPI
+    url: openapi/gemfury-packages-api-openapi.yml
+  - type: Documentation
+    url: https://gemfury.com/guide/api/
+  - type: GettingStarted
+    url: https://gemfury.com/guide/api/quickstart/
+- aid: gemfury:gemfury-tokens-api
+  name: Gemfury Tokens API
+  description: Manage API tokens
+  humanURL: https://gemfury.com/guide/api/
+  baseURL: https://api.fury.io
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/gemfury-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://gemfury.com/guide/api/
+  - type: GettingStarted
+    url: https://gemfury.com/guide/api/quickstart/
+- aid: gemfury:gemfury-versions-api
+  name: Gemfury Versions API
+  description: Manage package versions
+  humanURL: https://gemfury.com/guide/api/
+  baseURL: https://api.fury.io
+  tags:
+  - Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/gemfury-versions-api-openapi.yml
+  - type: Documentation
+    url: https://gemfury.com/guide/api/
+  - type: GettingStarted
+    url: https://gemfury.com/guide/api/quickstart/
 common:
   - type: AgenticAccess
     url: agentic-access/gemfury-agentic-access.yml
