@@ -1,0 +1,820 @@
+openapi: 3.0.3
+info:
+  title: Gemfury Developer API
+  description: >
+    REST API for managing packages, versions, accounts, members, and tokens
+    hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods
+    over HTTPS with JSON payloads.
+  version: '1'
+  contact:
+    name: Gemfury Support
+    url: https://gemfury.com/help/
+  license:
+    name: Proprietary
+    url: https://gemfury.com
+servers:
+  - url: https://api.fury.io/1
+    description: Gemfury API v1
+security:
+  - bearerAuth: []
+tags:
+  - name: Packages
+    description: Manage packages in a Gemfury repository
+  - name: Versions
+    description: Manage package versions
+  - name: Accounts
+    description: Retrieve account information
+  - name: Members
+    description: Manage collaborators and members
+  - name: Tokens
+    description: Manage API tokens
+paths:
+  /packages:
+    get:
+      operationId: listPackages
+      summary: List Packages
+      description: Retrieve a paginated list of all packages in the account.
+      tags:
+        - Packages
+      parameters:
+        - $ref: '#/components/parameters/asParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/perPageParam'
+      responses:
+        '200':
+          description: Paginated list of packages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  packages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Package'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+              example:
+                packages:
+                  - id: pkg_eb3c12
+                    name: express
+                    kind_key: js
+                    private: true
+                    version_count: 5
+                    release_version: '4.18.2'
+                    latest_version: '4.18.2'
+                total: 1
+                page: 1
+                per_page: 20
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /packages/{id}:
+    get:
+      operationId: getPackage
+      summary: Retrieve Package
+      description: Retrieve details about a specific package by ID or KIND:NAME.
+      tags:
+        - Packages
+      parameters:
+        - $ref: '#/components/parameters/packageId'
+        - $ref: '#/components/parameters/asParam'
+      responses:
+        '200':
+          description: Package details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Package'
+              example:
+                id: pkg_eb3c12
+                name: express
+                kind_key: js
+                private: true
+                version_count: 5
+                release_version: '4.18.2'
+                latest_version: '4.18.2'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePackage
+      summary: Delete Package
+      description: Delete a package and all its versions.
+      tags:
+        - Packages
+      parameters:
+        - $ref: '#/components/parameters/packageId'
+        - $ref: '#/components/parameters/asParam'
+      responses:
+        '204':
+          description: Package deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /packages/{id}/versions:
+    get:
+      operationId: listPackageVersions
+      summary: List Package Versions
+      description: Retrieve a paginated list of all versions for a specific package.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/packageId'
+        - $ref: '#/components/parameters/asParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/perPageParam'
+      responses:
+        '200':
+          description: Paginated list of versions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  versions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Version'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+              example:
+                versions:
+                  - id: ver_eb3c12
+                    name: express
+                    version: 4.18.2
+                    prerelease: false
+                    package_id: pkg_eb3c12
+                    kind_key: js
+                    filename: express-4.18.2.tgz
+                    digests:
+                      sha256: abc123
+                    download_url: https://cdn.fury.io/example/express-4.18.2.tgz
+                    created_at: '2023-01-15T12:00:00Z'
+                total: 1
+                page: 1
+                per_page: 20
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /versions:
+    get:
+      operationId: listVersions
+      summary: List Filtered Versions
+      description: Retrieve a filtered, paginated list of versions by package name and/or version string.
+      tags:
+        - Versions
+      parameters:
+        - name: name
+          in: query
+          description: Package name or KIND:NAME format
+          required: false
+          schema:
+            type: string
+          example: express
+        - name: version
+          in: query
+          description: Version string to filter by
+          required: false
+          schema:
+            type: string
+          example: 1.2.3
+        - $ref: '#/components/parameters/asParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/perPageParam'
+      responses:
+        '200':
+          description: Paginated list of matching versions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  versions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Version'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /versions/{id}:
+    get:
+      operationId: getVersion
+      summary: Retrieve Version
+      description: Retrieve details about a specific package version.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/versionId'
+        - $ref: '#/components/parameters/asParam'
+      responses:
+        '200':
+          description: Version details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+              example:
+                id: ver_eb3c12
+                name: express
+                version: 4.18.2
+                prerelease: false
+                package_id: pkg_eb3c12
+                kind_key: js
+                filename: express-4.18.2.tgz
+                digests:
+                  sha256: abc123
+                download_url: https://cdn.fury.io/example/express-4.18.2.tgz
+                created_at: '2023-01-15T12:00:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteVersion
+      summary: Delete Version
+      description: Delete a specific package version.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/versionId'
+        - $ref: '#/components/parameters/asParam'
+      responses:
+        '204':
+          description: Version deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accounts/{identifier}:
+    get:
+      operationId: getAccount
+      summary: Retrieve Account
+      description: >
+        Retrieve details about a specific account by username, unique ID
+        (format: acct_*), or the keyword "me" for the authenticated user.
+      tags:
+        - Accounts
+      parameters:
+        - name: identifier
+          in: path
+          description: Username, unique ID (acct_*), or "me" for the authenticated account
+          required: true
+          schema:
+            type: string
+          example: me
+        - $ref: '#/components/parameters/asParam'
+      responses:
+        '200':
+          description: Account details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              example:
+                id: acct_eb3c12
+                username: nickfury
+                name: Nick Fury
+                type_key: user
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /collaborations:
+    get:
+      operationId: listCollaborations
+      summary: List Collaborations
+      description: Retrieve all accounts where the authenticated user is a collaborator.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/perPageParam'
+      responses:
+        '200':
+          description: List of collaborations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collaborations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /members:
+    get:
+      operationId: listMembers
+      summary: List Members
+      description: Retrieve a list of members (collaborators) for the account.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/asParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/perPageParam'
+      responses:
+        '200':
+          description: List of members
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Member'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /members/{id}:
+    put:
+      operationId: upsertMember
+      summary: Invite or Update Member
+      description: >
+        Update a membership or send an invitation email if the user is not already
+        a member.
+      tags:
+        - Members
+      parameters:
+        - name: id
+          in: path
+          description: Email address or username of the invitee or existing member
+          required: true
+          schema:
+            type: string
+          example: name@example.com
+        - name: role
+          in: query
+          description: 'Permission level: pull, push, or owner'
+          required: true
+          schema:
+            type: string
+            enum:
+              - pull
+              - push
+              - owner
+        - $ref: '#/components/parameters/asParam'
+      responses:
+        '200':
+          description: Member updated or invitation sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteMember
+      summary: Remove Member
+      description: Remove a member from the account.
+      tags:
+        - Members
+      parameters:
+        - name: id
+          in: path
+          description: Unique identifier or username of the member
+          required: true
+          schema:
+            type: string
+          example: collab-name
+        - $ref: '#/components/parameters/asParam'
+      responses:
+        '204':
+          description: Member removed successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /tokens:
+    get:
+      operationId: listTokens
+      summary: List Tokens
+      description: Retrieve a paginated list of tokens for the account.
+      tags:
+        - Tokens
+      parameters:
+        - $ref: '#/components/parameters/asParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/perPageParam'
+      responses:
+        '200':
+          description: Paginated list of tokens
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tokens:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Token'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+              example:
+                tokens:
+                  - id: tok_eb3c12
+                    kind_key: pull
+                    state: active
+                    assignee_id: acct_eb3c12
+                    description: CI deploy token
+                    created_at: '2023-01-15T12:00:00Z'
+                total: 1
+                page: 1
+                per_page: 20
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createToken
+      summary: Create Token
+      description: Create a new authentication token for the account.
+      tags:
+        - Tokens
+      parameters:
+        - name: kind_key
+          in: query
+          description: 'Permission level: pull or push'
+          required: true
+          schema:
+            type: string
+            enum:
+              - pull
+              - push
+        - name: assignee_id
+          in: query
+          description: Username or ID of the user receiving the token
+          required: true
+          schema:
+            type: string
+        - name: description
+          in: query
+          description: Human-readable label for the token
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/asParam'
+      responses:
+        '201':
+          description: Token created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /tokens/{id}:
+    delete:
+      operationId: deleteToken
+      summary: Delete Token
+      description: Remove a token by its identifier.
+      tags:
+        - Tokens
+      parameters:
+        - name: id
+          in: path
+          description: Unique token identifier
+          required: true
+          schema:
+            type: string
+          example: tok_eb3c12
+        - $ref: '#/components/parameters/asParam'
+      responses:
+        '204':
+          description: Token deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API token obtained from the Gemfury dashboard
+  parameters:
+    asParam:
+      name: as
+      in: query
+      description: Account context override (username or account ID)
+      required: false
+      schema:
+        type: string
+      example: nickfury
+    pageParam:
+      name: page
+      in: query
+      description: Page number for pagination
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    perPageParam:
+      name: per_page
+      in: query
+      description: Number of items per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    packageId:
+      name: id
+      in: path
+      description: Unique package identifier or KIND:NAME format (e.g. js:express)
+      required: true
+      schema:
+        type: string
+      example: pkg_eb3c12
+    versionId:
+      name: id
+      in: path
+      description: Unique version identifier
+      required: true
+      schema:
+        type: string
+      example: ver_eb3c12
+  schemas:
+    Package:
+      type: object
+      description: A package hosted on Gemfury
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the package
+          example: pkg_eb3c12
+        name:
+          type: string
+          description: Package name
+          example: express
+        kind_key:
+          type: string
+          description: Package type/ecosystem key (e.g. gem, js, pip, composer, nuget)
+          example: js
+        private:
+          type: boolean
+          description: Whether the package is private
+          example: true
+        version_count:
+          type: integer
+          description: Total number of versions
+          example: 5
+        release_version:
+          type: string
+          description: Latest stable (non-prerelease) version
+          example: 4.18.2
+        latest_version:
+          type: string
+          description: Latest version including prereleases
+          example: 4.18.2
+    Version:
+      type: object
+      description: A specific version of a package
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the version
+          example: ver_eb3c12
+        name:
+          type: string
+          description: Package name
+          example: express
+        version:
+          type: string
+          description: Version string
+          example: 4.18.2
+        prerelease:
+          type: boolean
+          description: Whether this is a prerelease version
+          example: false
+        package_id:
+          type: string
+          description: ID of the parent package
+          example: pkg_eb3c12
+        kind_key:
+          type: string
+          description: Package ecosystem key
+          example: js
+        filename:
+          type: string
+          description: File name of the package artifact
+          example: express-4.18.2.tgz
+        digests:
+          type: object
+          description: Cryptographic hashes of the package artifact
+          additionalProperties:
+            type: string
+          example:
+            sha256: abc123def456
+        download_url:
+          type: string
+          format: uri
+          description: Direct download URL for the package artifact
+          example: https://cdn.fury.io/example/express-4.18.2.tgz
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the version was uploaded
+          example: '2023-01-15T12:00:00Z'
+    Account:
+      type: object
+      description: A Gemfury account (user, organization, or Heroku app)
+      properties:
+        id:
+          type: string
+          description: Unique account identifier
+          example: acct_eb3c12
+        username:
+          type: string
+          description: Unique username
+          example: nickfury
+        name:
+          type: string
+          description: Display name
+          example: Nick Fury
+        type_key:
+          type: string
+          description: Account type
+          enum:
+            - user
+            - org
+            - heroku_app
+          example: user
+    Member:
+      type: object
+      description: A collaborator member on an account
+      properties:
+        id:
+          type: string
+          description: Unique member identifier
+          example: acct_eb3c12
+        username:
+          type: string
+          description: Member's username
+          example: collab-name
+        name:
+          type: string
+          description: Member's display name
+          example: Jane Doe
+        email:
+          type: string
+          format: email
+          description: Member's email address
+          example: jane@example.com
+        role:
+          type: string
+          description: Member's permission level
+          enum:
+            - pull
+            - push
+            - owner
+          example: push
+    Token:
+      type: object
+      description: An API authentication token
+      properties:
+        id:
+          type: string
+          description: Unique token identifier
+          example: tok_eb3c12
+        kind_key:
+          type: string
+          description: Token permission level
+          enum:
+            - pull
+            - push
+          example: pull
+        state:
+          type: string
+          description: Token state
+          enum:
+            - active
+            - inactive
+          example: active
+        assignee_id:
+          type: string
+          description: ID of the user the token is assigned to
+          example: acct_eb3c12
+        description:
+          type: string
+          description: Human-readable label for the token
+          example: CI deploy token
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the token was created
+          example: '2023-01-15T12:00:00Z'
+    Error:
+      type: object
+      description: Error response
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Human-readable error message
+              example: Package not found
+            type:
+              type: string
+              description: Error class categorization
+              example: InputException
+  responses:
+    BadRequest:
+      description: Bad request, usually an input error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid kind_key value
+              type: InputException
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Authentication required
+              type: AuthException
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
+    NotFound:
+      description: Referenced object not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Package not found
+              type: NotFoundException

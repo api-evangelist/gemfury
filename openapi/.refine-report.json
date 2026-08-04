@@ -1,0 +1,22 @@
+{
+  "provider": "gemfury",
+  "sources": [
+    "gemfury-accounts-api-openapi.yml",
+    "gemfury-members-api-openapi.yml",
+    "gemfury-packages-api-openapi.yml",
+    "gemfury-tokens-api-openapi.yml",
+    "gemfury-versions-api-openapi.yml"
+  ],
+  "outputs": [
+    "gemfury-accounts-api-openapi.yml",
+    "gemfury-members-api-openapi.yml",
+    "gemfury-packages-api-openapi.yml",
+    "gemfury-tokens-api-openapi.yml",
+    "gemfury-versions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
