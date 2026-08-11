@@ -107,6 +107,13 @@ apis:
   - type: GettingStarted
     url: https://gemfury.com/guide/api/quickstart/
 common:
+  - type: IssueTracker
+    url: https://github.com/gemfury/gemfury/issues
+  - type: Releases
+    url: https://github.com/gemfury/gemfury/releases
+  - type: License
+    name: MIT
+    url: https://github.com/gemfury/gemfury/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/gemfury-agentic-access.yml
   - type: DomainSecurity
