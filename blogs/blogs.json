@@ -5,7 +5,7 @@
       "source": "https://fury.blog/rss/",
       "feed_url": "https://fury.blog/rss/",
       "title": "",
-      "saved": 0,
+      "saved": 1,
       "method": "feed"
     },
     {
@@ -13,9 +13,10 @@
       "feed_url": "https://github.com/gemfury",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "none",
+      "error": "parse_failed"
     }
   ],
-  "post_count": 50,
-  "fetched": "2026-08-06T14:08:46Z"
+  "post_count": 51,
+  "fetched": "2026-08-15T12:11:08Z"
 }
