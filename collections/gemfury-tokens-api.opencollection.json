@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gemfury Developer Accounts Tokens API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fury.io/1/tokens",
+            "params": [
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of tokens for the account."
+        },
+        {
+          "info": {
+            "name": "Create Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fury.io/1/tokens",
+            "params": [
+              {
+                "name": "kind_key",
+                "value": "",
+                "type": "query",
+                "description": "Permission level: pull or push"
+              },
+              {
+                "name": "assignee_id",
+                "value": "",
+                "type": "query",
+                "description": "Username or ID of the user receiving the token"
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Human-readable label for the token"
+              },
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              }
+            ]
+          },
+          "docs": "Create a new authentication token for the account."
+        },
+        {
+          "info": {
+            "name": "Delete Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.fury.io/1/tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "tok_eb3c12",
+                "type": "path",
+                "description": "Unique token identifier"
+              },
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              }
+            ]
+          },
+          "docs": "Remove a token by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

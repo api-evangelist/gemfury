@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gemfury Developer Accounts Packages API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Packages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fury.io/1/packages",
+            "params": [
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of all packages in the account."
+        },
+        {
+          "info": {
+            "name": "Retrieve Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fury.io/1/packages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "pkg_eb3c12",
+                "type": "path",
+                "description": "Unique package identifier or KIND:NAME format (e.g. js:express)"
+              },
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a specific package by ID or KIND:NAME."
+        },
+        {
+          "info": {
+            "name": "Delete Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.fury.io/1/packages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "pkg_eb3c12",
+                "type": "path",
+                "description": "Unique package identifier or KIND:NAME format (e.g. js:express)"
+              },
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              }
+            ]
+          },
+          "docs": "Delete a package and all its versions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

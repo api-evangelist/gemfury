@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gemfury Developer Accounts Members API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Collaborations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fury.io/1/collaborations",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieve all accounts where the authenticated user is a collaborator."
+        },
+        {
+          "info": {
+            "name": "List Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fury.io/1/members",
+            "params": [
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of members (collaborators) for the account."
+        },
+        {
+          "info": {
+            "name": "Invite or Update Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.fury.io/1/members/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "name@example.com",
+                "type": "path",
+                "description": "Email address or username of the invitee or existing member"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "query",
+                "description": "Permission level: pull, push, or owner"
+              },
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              }
+            ]
+          },
+          "docs": "Update a membership or send an invitation email if the user is not already a member.\n"
+        },
+        {
+          "info": {
+            "name": "Remove Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.fury.io/1/members/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "collab-name",
+                "type": "path",
+                "description": "Unique identifier or username of the member"
+              },
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              }
+            ]
+          },
+          "docs": "Remove a member from the account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

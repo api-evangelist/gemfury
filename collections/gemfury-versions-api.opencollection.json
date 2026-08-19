@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gemfury Developer Accounts Versions API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Package Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fury.io/1/packages/:id/versions",
+            "params": [
+              {
+                "name": "id",
+                "value": "pkg_eb3c12",
+                "type": "path",
+                "description": "Unique package identifier or KIND:NAME format (e.g. js:express)"
+              },
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of all versions for a specific package."
+        },
+        {
+          "info": {
+            "name": "List Filtered Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fury.io/1/versions",
+            "params": [
+              {
+                "name": "name",
+                "value": "express",
+                "type": "query",
+                "description": "Package name or KIND:NAME format"
+              },
+              {
+                "name": "version",
+                "value": "1.2.3",
+                "type": "query",
+                "description": "Version string to filter by"
+              },
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieve a filtered, paginated list of versions by package name and/or version string."
+        },
+        {
+          "info": {
+            "name": "Retrieve Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fury.io/1/versions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ver_eb3c12",
+                "type": "path",
+                "description": "Unique version identifier"
+              },
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a specific package version."
+        },
+        {
+          "info": {
+            "name": "Delete Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.fury.io/1/versions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ver_eb3c12",
+                "type": "path",
+                "description": "Unique version identifier"
+              },
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              }
+            ]
+          },
+          "docs": "Delete a specific package version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

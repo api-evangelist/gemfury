@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gemfury Developer Accounts API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fury.io/1/accounts/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "me",
+                "type": "path",
+                "description": "Username, unique ID (acct_*), or \"me\" for the authenticated account"
+              },
+              {
+                "name": "as",
+                "value": "nickfury",
+                "type": "query",
+                "description": "Account context override (username or account ID)"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a specific account by username, unique ID (format: acct_*), or the keyword \"me\" for the authenticated user.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
