@@ -42,6 +42,8 @@ apis:
   humanURL: https://gemfury.com/guide/api/
   baseURL: https://api.fury.io
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
