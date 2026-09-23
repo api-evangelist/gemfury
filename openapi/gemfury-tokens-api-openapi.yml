@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gemfury Developer Accounts Tokens API
-  description: 'REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.
-
-    '
+  title: Gemfury Developer Tokens API
+  description: REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.
   version: '1'
   contact:
     name: Gemfury Support
@@ -132,7 +130,65 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Referenced object not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Package not found
+              type: NotFoundException
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Authentication required
+              type: AuthException
+    BadRequest:
+      description: Bad request, usually an input error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid kind_key value
+              type: InputException
   parameters:
+    asParam:
+      name: as
+      in: query
+      description: Account context override (username or account ID)
+      required: false
+      schema:
+        type: string
+      example: nickfury
+    pageParam:
+      name: page
+      in: query
+      description: Page number for pagination
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
     perPageParam:
       name: per_page
       in: query
@@ -143,39 +199,7 @@ components:
         minimum: 1
         maximum: 100
         default: 20
-    pageParam:
-      name: page
-      in: query
-      description: Page number for pagination
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    asParam:
-      name: as
-      in: query
-      description: Account context override (username or account ID)
-      required: false
-      schema:
-        type: string
-      example: nickfury
   schemas:
-    Error:
-      type: object
-      description: Error response
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: Human-readable error message
-              example: Package not found
-            type:
-              type: string
-              description: Error class categorization
-              example: InputException
     Token:
       type: object
       description: An API authentication token
@@ -211,47 +235,21 @@ components:
           format: date-time
           description: Timestamp when the token was created
           example: '2023-01-15T12:00:00Z'
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Authentication required
-              type: AuthException
-    BadRequest:
-      description: Bad request, usually an input error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid kind_key value
-              type: InputException
-    NotFound:
-      description: Referenced object not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Package not found
-              type: NotFoundException
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Insufficient permissions for this request
-              type: ForbiddenException
+    Error:
+      type: object
+      description: Error response
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Human-readable error message
+              example: Package not found
+            type:
+              type: string
+              description: Error class categorization
+              example: InputException
   securitySchemes:
     bearerAuth:
       type: http

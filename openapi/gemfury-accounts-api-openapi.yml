@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Gemfury Developer Accounts API
-  description: 'REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.
-
-    '
+  description: REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.
   version: '1'
   contact:
     name: Gemfury Support
@@ -24,9 +22,7 @@ paths:
     get:
       operationId: getAccount
       summary: Retrieve Account
-      description: 'Retrieve details about a specific account by username, unique ID (format: acct_*), or the keyword "me" for the authenticated user.
-
-        '
+      description: 'Retrieve details about a specific account by username, unique ID (format: acct_*), or the keyword "me" for the authenticated user.'
       tags:
       - Accounts
       parameters:
@@ -57,22 +53,47 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Referenced object not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Package not found
+              type: NotFoundException
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Authentication required
+              type: AuthException
+  parameters:
+    asParam:
+      name: as
+      in: query
+      description: Account context override (username or account ID)
+      required: false
+      schema:
+        type: string
+      example: nickfury
   schemas:
-    Error:
-      type: object
-      description: Error response
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: Human-readable error message
-              example: Package not found
-            type:
-              type: string
-              description: Error class categorization
-              example: InputException
     Account:
       type: object
       description: A Gemfury account (user, organization, or Heroku app)
@@ -97,46 +118,21 @@ components:
           - org
           - heroku_app
           example: user
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Authentication required
-              type: AuthException
-    NotFound:
-      description: Referenced object not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Package not found
-              type: NotFoundException
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Insufficient permissions for this request
-              type: ForbiddenException
-  parameters:
-    asParam:
-      name: as
-      in: query
-      description: Account context override (username or account ID)
-      required: false
-      schema:
-        type: string
-      example: nickfury
+    Error:
+      type: object
+      description: Error response
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Human-readable error message
+              example: Package not found
+            type:
+              type: string
+              description: Error class categorization
+              example: InputException
   securitySchemes:
     bearerAuth:
       type: http

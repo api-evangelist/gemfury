@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gemfury Developer Accounts Versions API
-  description: 'REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.
-
-    '
+  title: Gemfury Developer Versions API
+  description: REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.
   version: '1'
   contact:
     name: Gemfury Support
@@ -173,6 +171,81 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Referenced object not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Package not found
+              type: NotFoundException
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Authentication required
+              type: AuthException
+  parameters:
+    packageId:
+      name: id
+      in: path
+      description: Unique package identifier or KIND:NAME format (e.g. js:express)
+      required: true
+      schema:
+        type: string
+      example: pkg_eb3c12
+    asParam:
+      name: as
+      in: query
+      description: Account context override (username or account ID)
+      required: false
+      schema:
+        type: string
+      example: nickfury
+    pageParam:
+      name: page
+      in: query
+      description: Page number for pagination
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    perPageParam:
+      name: per_page
+      in: query
+      description: Number of items per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    versionId:
+      name: id
+      in: path
+      description: Unique version identifier
+      required: true
+      schema:
+        type: string
+      example: ver_eb3c12
   schemas:
     Version:
       type: object
@@ -238,81 +311,6 @@ components:
               type: string
               description: Error class categorization
               example: InputException
-  parameters:
-    perPageParam:
-      name: per_page
-      in: query
-      description: Number of items per page
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-    pageParam:
-      name: page
-      in: query
-      description: Page number for pagination
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    versionId:
-      name: id
-      in: path
-      description: Unique version identifier
-      required: true
-      schema:
-        type: string
-      example: ver_eb3c12
-    asParam:
-      name: as
-      in: query
-      description: Account context override (username or account ID)
-      required: false
-      schema:
-        type: string
-      example: nickfury
-    packageId:
-      name: id
-      in: path
-      description: Unique package identifier or KIND:NAME format (e.g. js:express)
-      required: true
-      schema:
-        type: string
-      example: pkg_eb3c12
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Authentication required
-              type: AuthException
-    NotFound:
-      description: Referenced object not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Package not found
-              type: NotFoundException
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Insufficient permissions for this request
-              type: ForbiddenException
   securitySchemes:
     bearerAuth:
       type: http
