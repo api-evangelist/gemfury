@@ -113,6 +113,73 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Referenced object not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Package not found
+              type: NotFoundException
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Authentication required
+              type: AuthException
+  parameters:
+    pageParam:
+      name: page
+      in: query
+      description: Page number for pagination
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    perPageParam:
+      name: per_page
+      in: query
+      description: Number of items per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    asParam:
+      name: as
+      in: query
+      description: Account context override (username or account ID)
+      required: false
+      schema:
+        type: string
+      example: nickfury
+    packageId:
+      name: id
+      in: path
+      description: Unique package identifier or KIND:NAME format (e.g. js:express)
+      required: true
+      schema:
+        type: string
+      example: pkg_eb3c12
   schemas:
     Error:
       type: object
@@ -161,73 +228,6 @@ components:
           type: string
           description: Latest version including prereleases
           example: 4.18.2
-  responses:
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Insufficient permissions for this request
-              type: ForbiddenException
-    NotFound:
-      description: Referenced object not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Package not found
-              type: NotFoundException
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Authentication required
-              type: AuthException
-  parameters:
-    packageId:
-      name: id
-      in: path
-      description: Unique package identifier or KIND:NAME format (e.g. js:express)
-      required: true
-      schema:
-        type: string
-      example: pkg_eb3c12
-    perPageParam:
-      name: per_page
-      in: query
-      description: Number of items per page
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-    asParam:
-      name: as
-      in: query
-      description: Account context override (username or account ID)
-      required: false
-      schema:
-        type: string
-      example: nickfury
-    pageParam:
-      name: page
-      in: query
-      description: Page number for pagination
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   securitySchemes:
     bearerAuth:
       type: http

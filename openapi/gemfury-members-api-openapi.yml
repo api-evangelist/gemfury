@@ -138,21 +138,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
-      type: object
-      description: Error response
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: Human-readable error message
-              example: Package not found
-            type:
-              type: string
-              description: Error class categorization
-              example: InputException
     Member:
       type: object
       description: A collaborator member on an account
@@ -182,6 +167,21 @@ components:
           - push
           - owner
           example: push
+    Error:
+      type: object
+      description: Error response
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Human-readable error message
+              example: Package not found
+            type:
+              type: string
+              description: Error class categorization
+              example: InputException
     Account:
       type: object
       description: A Gemfury account (user, organization, or Heroku app)
@@ -207,16 +207,6 @@ components:
           - heroku_app
           example: user
   responses:
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Insufficient permissions for this request
-              type: ForbiddenException
     NotFound:
       description: Referenced object not found
       content:
@@ -227,16 +217,6 @@ components:
             error:
               message: Package not found
               type: NotFoundException
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Authentication required
-              type: AuthException
     BadRequest:
       description: Bad request, usually an input error
       content:
@@ -247,7 +227,35 @@ components:
             error:
               message: Invalid kind_key value
               type: InputException
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Authentication required
+              type: AuthException
   parameters:
+    asParam:
+      name: as
+      in: query
+      description: Account context override (username or account ID)
+      required: false
+      schema:
+        type: string
+      example: nickfury
     perPageParam:
       name: per_page
       in: query
@@ -258,14 +266,6 @@ components:
         minimum: 1
         maximum: 100
         default: 20
-    asParam:
-      name: as
-      in: query
-      description: Account context override (username or account ID)
-      required: false
-      schema:
-        type: string
-      example: nickfury
     pageParam:
       name: page
       in: query

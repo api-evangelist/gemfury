@@ -172,21 +172,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
-      type: object
-      description: Error response
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: Human-readable error message
-              example: Package not found
-            type:
-              type: string
-              description: Error class categorization
-              example: InputException
     Version:
       type: object
       description: A specific version of a package
@@ -236,17 +221,22 @@ components:
           format: date-time
           description: Timestamp when the version was uploaded
           example: '2023-01-15T12:00:00Z'
+    Error:
+      type: object
+      description: Error response
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Human-readable error message
+              example: Package not found
+            type:
+              type: string
+              description: Error class categorization
+              example: InputException
   responses:
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Insufficient permissions for this request
-              type: ForbiddenException
     NotFound:
       description: Referenced object not found
       content:
@@ -257,6 +247,16 @@ components:
             error:
               message: Package not found
               type: NotFoundException
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
     Unauthorized:
       description: Authentication required
       content:
@@ -276,6 +276,15 @@ components:
       schema:
         type: string
       example: ver_eb3c12
+    pageParam:
+      name: page
+      in: query
+      description: Page number for pagination
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
     perPageParam:
       name: per_page
       in: query
@@ -302,15 +311,6 @@ components:
       schema:
         type: string
       example: pkg_eb3c12
-    pageParam:
-      name: page
-      in: query
-      description: Page number for pagination
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   securitySchemes:
     bearerAuth:
       type: http
