@@ -64,16 +64,6 @@ components:
             error:
               message: Package not found
               type: NotFoundException
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Insufficient permissions for this request
-              type: ForbiddenException
     Unauthorized:
       description: Authentication required
       content:
@@ -84,6 +74,16 @@ components:
             error:
               message: Authentication required
               type: AuthException
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
   parameters:
     asParam:
       name: as
