@@ -114,15 +114,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    pageParam:
-      name: page
-      in: query
-      description: Page number for pagination
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
     asParam:
       name: as
       in: query
@@ -139,6 +130,15 @@ components:
       schema:
         type: string
       example: pkg_eb3c12
+    pageParam:
+      name: page
+      in: query
+      description: Page number for pagination
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
     perPageParam:
       name: per_page
       in: query
@@ -150,6 +150,16 @@ components:
         maximum: 100
         default: 20
   responses:
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
     NotFound:
       description: Referenced object not found
       content:
@@ -170,16 +180,6 @@ components:
             error:
               message: Authentication required
               type: AuthException
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Insufficient permissions for this request
-              type: ForbiddenException
   schemas:
     Error:
       type: object

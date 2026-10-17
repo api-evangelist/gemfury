@@ -138,6 +138,14 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
+    asParam:
+      name: as
+      in: query
+      description: Account context override (username or account ID)
+      required: false
+      schema:
+        type: string
+      example: nickfury
     pageParam:
       name: page
       in: query
@@ -147,14 +155,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-    asParam:
-      name: as
-      in: query
-      description: Account context override (username or account ID)
-      required: false
-      schema:
-        type: string
-      example: nickfury
     perPageParam:
       name: per_page
       in: query
@@ -166,6 +166,16 @@ components:
         maximum: 100
         default: 20
   responses:
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Insufficient permissions for this request
+              type: ForbiddenException
     NotFound:
       description: Referenced object not found
       content:
@@ -186,16 +196,6 @@ components:
             error:
               message: Authentication required
               type: AuthException
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Insufficient permissions for this request
-              type: ForbiddenException
     BadRequest:
       description: Bad request, usually an input error
       content:
