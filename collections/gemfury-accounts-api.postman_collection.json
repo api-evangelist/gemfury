@@ -1,302 +1,299 @@
 {
+  "info": {
+    "_postman_id": "c4721a88-ec79-4a62-9baa-e13c36478522",
+    "name": "Gemfury Developer Accounts API",
+    "description": "REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.\n\nContact Support:\n Name: Gemfury Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:27:39.000Z",
+    "updatedAt": "2026-10-21T20:27:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c4721a88-ec79-4a62-9baa-e13c36478522"
+  },
   "item": [
     {
-      "id": "e316d5c3-278e-447c-981d-561d52a69a74",
-      "name": "Accounts",
-      "description": {
-        "content": "Retrieve account information",
-        "type": "text/plain"
-      },
+      "name": "accounts",
       "item": [
         {
-          "id": "8f5f0075-360c-4ae6-9dca-1006d698d402",
-          "name": "Retrieve Account",
-          "request": {
-            "name": "Retrieve Account",
-            "description": {
-              "content": "Retrieve details about a specific account by username, unique ID (format: acct_*), or the keyword \"me\" for the authenticated user.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "accounts",
-                ":identifier"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "as",
-                  "value": "<string>",
-                  "description": "Account context override (username or account ID)"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "identifier",
-                  "description": "(Required) Username, unique ID (acct_*), or \"me\" for the authenticated account"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{identifier}",
+          "item": [
             {
-              "id": "7dae556e-b6fc-4373-9d65-126c51162586",
-              "name": "Account details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "accounts",
-                    ":identifier"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "identifier",
-                      "description": "(Required) Username, unique ID (acct_*), or \"me\" for the authenticated account"
-                    }
-                  ]
-                },
+              "name": "Retrieve Account",
+              "id": "6f1880e4-37a3-480d-9d73-907b7635e6cd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"acct_eb3c12\",\n  \"username\": \"nickfury\",\n  \"name\": \"Nick Fury\",\n  \"type_key\": \"user\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7e6e0b38-6e24-457e-8f01-1eae282ab231",
-              "name": "Authentication required",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/accounts/:identifier?as=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "accounts",
                     ":identifier"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Account context override (username or account ID)",
                       "key": "as",
-                      "value": "nickfury"
+                      "value": "<string>"
                     }
                   ],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "f3cab5d6-fad3-45c2-952a-db42b7772c5d",
                       "key": "identifier",
+                      "value": "<string>",
                       "description": "(Required) Username, unique ID (acct_*), or \"me\" for the authenticated account"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Retrieve details about a specific account by username, unique ID (format: acct_*), or the keyword \"me\" for the authenticated user."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Authentication required\",\n    \"type\": \"AuthException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "04f33d52-819e-4c88-b1a0-fccd40d1948f",
-              "name": "Insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "accounts",
-                    ":identifier"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "89cc1a18-b0d2-452f-9249-a3e1ba0e8b6c",
+                  "name": "Account details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:identifier?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":identifier"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "identifier"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "as",
-                      "value": "nickfury"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "identifier",
-                      "description": "(Required) Username, unique ID (acct_*), or \"me\" for the authenticated account"
-                    }
-                  ]
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"username\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type_key\": \"user\"\n}",
+                  "createdAt": "2026-10-21T20:27:40.000Z",
+                  "updatedAt": "2026-10-21T20:27:40.000Z",
+                  "uid": "35240-89cc1a18-b0d2-452f-9249-a3e1ba0e8b6c"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Insufficient permissions for this request\",\n    \"type\": \"ForbiddenException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2b4884b8-bc29-4288-a5e2-2b67555ae105",
-              "name": "Referenced object not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "accounts",
-                    ":identifier"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "69b12677-788f-43da-82d0-e32a5ace7e8a",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:identifier?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":identifier"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "identifier"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "as",
-                      "value": "nickfury"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "identifier",
-                      "description": "(Required) Username, unique ID (acct_*), or \"me\" for the authenticated account"
-                    }
-                  ]
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:40.000Z",
+                  "updatedAt": "2026-10-21T20:27:40.000Z",
+                  "uid": "35240-69b12677-788f-43da-82d0-e32a5ace7e8a"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "dddf1c08-4c74-4f5b-bff0-1b1d664dd1fd",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:identifier?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":identifier"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "identifier"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:40.000Z",
+                  "updatedAt": "2026-10-21T20:27:40.000Z",
+                  "uid": "35240-dddf1c08-4c74-4f5b-bff0-1b1d664dd1fd"
+                },
+                {
+                  "id": "cfef2d95-0b1d-4c71-9c92-611dd333ccfc",
+                  "name": "Referenced object not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:identifier?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":identifier"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "identifier"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:40.000Z",
+                  "updatedAt": "2026-10-21T20:27:40.000Z",
+                  "uid": "35240-cfef2d95-0b1d-4c71-9c92-611dd333ccfc"
                 }
               ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Package not found\",\n    \"type\": \"NotFoundException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:27:40.000Z",
+              "updatedAt": "2026-10-21T20:27:40.000Z",
+              "uid": "35240-6f1880e4-37a3-480d-9d73-907b7635e6cd"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "c3926363-0cbb-493b-aaad-1ed7b9ff4118",
+          "createdAt": "2026-10-21T20:27:40.000Z",
+          "updatedAt": "2026-10-21T20:27:40.000Z",
+          "uid": "35240-c3926363-0cbb-493b-aaad-1ed7b9ff4118"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.fury.io/1",
-      "key": "baseUrl"
+      "id": "d3821d3c-003e-4607-a6c0-35db69c5934f",
+      "createdAt": "2026-10-21T20:27:40.000Z",
+      "updatedAt": "2026-10-21T20:27:40.000Z",
+      "uid": "35240-d3821d3c-003e-4607-a6c0-35db69c5934f"
     }
   ],
   "auth": {
@@ -304,17 +301,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e14a1a0d-31ab-4666-8095-90b6a8bf78e7",
-    "name": "Gemfury Developer Accounts API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.\n\n\nContact Support:\n Name: Gemfury Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fury.io/1"
     }
-  }
+  ]
 }

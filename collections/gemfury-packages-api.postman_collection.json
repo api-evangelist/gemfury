@@ -1,799 +1,782 @@
 {
+  "info": {
+    "_postman_id": "a1e781ec-4852-4d1f-b89a-043ebb40788e",
+    "name": "Gemfury Developer Packages API",
+    "description": "REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.\n\nContact Support:\n Name: Gemfury Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:27:52.000Z",
+    "updatedAt": "2026-10-21T20:27:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a1e781ec-4852-4d1f-b89a-043ebb40788e"
+  },
   "item": [
     {
-      "id": "71aa8ef0-5454-4372-ba5f-38ec866c4266",
-      "name": "Packages",
-      "description": {
-        "content": "Manage packages in a Gemfury repository",
-        "type": "text/plain"
-      },
+      "name": "packages",
       "item": [
         {
-          "id": "92e50900-b2ce-4596-93ae-0d52ca1b0664",
-          "name": "List Packages",
-          "request": {
-            "name": "List Packages",
-            "description": {
-              "content": "Retrieve a paginated list of all packages in the account.",
-              "type": "text/plain"
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve Package",
+              "id": "98b99f44-8e1f-4f1e-a685-82a004b992c0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/packages/:id?as=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "packages",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Account context override (username or account ID)",
+                      "key": "as",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "1d3b383c-3bb6-42a5-905d-55d321d92f4e",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
+                    }
+                  ]
+                },
+                "description": "Retrieve details about a specific package by ID or KIND:NAME."
+              },
+              "response": [
+                {
+                  "id": "17d6550b-9ab9-41a0-9c3e-2a861854a726",
+                  "name": "Package details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/packages/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "packages",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"kind_key\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"version_count\": \"<integer>\",\n  \"release_version\": \"<string>\",\n  \"latest_version\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:27:52.000Z",
+                  "updatedAt": "2026-10-21T20:27:52.000Z",
+                  "uid": "35240-17d6550b-9ab9-41a0-9c3e-2a861854a726"
+                },
+                {
+                  "id": "4bd30d4f-c07e-4995-976f-6da9aa52ddbc",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/packages/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "packages",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:52.000Z",
+                  "updatedAt": "2026-10-21T20:27:52.000Z",
+                  "uid": "35240-4bd30d4f-c07e-4995-976f-6da9aa52ddbc"
+                },
+                {
+                  "id": "8aad5f49-99b6-46df-9522-69783c8363fb",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/packages/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "packages",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:52.000Z",
+                  "updatedAt": "2026-10-21T20:27:52.000Z",
+                  "uid": "35240-8aad5f49-99b6-46df-9522-69783c8363fb"
+                },
+                {
+                  "id": "7f308f5c-a7df-45b2-8fac-074d63cd778e",
+                  "name": "Referenced object not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/packages/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "packages",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:52.000Z",
+                  "updatedAt": "2026-10-21T20:27:52.000Z",
+                  "uid": "35240-7f308f5c-a7df-45b2-8fac-074d63cd778e"
+                }
+              ],
+              "createdAt": "2026-10-21T20:27:52.000Z",
+              "updatedAt": "2026-10-21T20:27:52.000Z",
+              "uid": "35240-98b99f44-8e1f-4f1e-a685-82a004b992c0"
             },
+            {
+              "name": "Delete Package",
+              "id": "d2e6ccac-8868-4b79-82cb-fa999b559423",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/packages/:id?as=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "packages",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Account context override (username or account ID)",
+                      "key": "as",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "b3c63013-3e95-4fad-937a-f3dd2e5224a5",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
+                    }
+                  ]
+                },
+                "description": "Delete a package and all its versions."
+              },
+              "response": [
+                {
+                  "id": "0daa6419-3db5-4f79-b402-9062fab61de1",
+                  "name": "Package deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/packages/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "packages",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:27:52.000Z",
+                  "updatedAt": "2026-10-21T20:27:52.000Z",
+                  "uid": "35240-0daa6419-3db5-4f79-b402-9062fab61de1"
+                },
+                {
+                  "id": "b7875e42-bce7-4cf1-9145-5f0e74113458",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/packages/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "packages",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:52.000Z",
+                  "updatedAt": "2026-10-21T20:27:52.000Z",
+                  "uid": "35240-b7875e42-bce7-4cf1-9145-5f0e74113458"
+                },
+                {
+                  "id": "0d4c9f01-7354-448e-83c4-6cc016dbaf12",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/packages/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "packages",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:52.000Z",
+                  "updatedAt": "2026-10-21T20:27:52.000Z",
+                  "uid": "35240-0d4c9f01-7354-448e-83c4-6cc016dbaf12"
+                },
+                {
+                  "id": "73ba3301-5a21-4d7c-9d0e-ba1b934993f7",
+                  "name": "Referenced object not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/packages/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "packages",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:52.000Z",
+                  "updatedAt": "2026-10-21T20:27:52.000Z",
+                  "uid": "35240-73ba3301-5a21-4d7c-9d0e-ba1b934993f7"
+                }
+              ],
+              "createdAt": "2026-10-21T20:27:52.000Z",
+              "updatedAt": "2026-10-21T20:27:52.000Z",
+              "uid": "35240-d2e6ccac-8868-4b79-82cb-fa999b559423"
+            }
+          ],
+          "id": "13c253ac-c3ed-4154-9649-a6b704a807d7",
+          "createdAt": "2026-10-21T20:27:52.000Z",
+          "updatedAt": "2026-10-21T20:27:52.000Z",
+          "uid": "35240-13c253ac-c3ed-4154-9649-a6b704a807d7"
+        },
+        {
+          "name": "List Packages",
+          "id": "c64d606e-20fd-4941-83a4-e7a1d851fc77",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/packages?as=<string>&page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "packages"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Account context override (username or account ID)",
                   "key": "as",
-                  "value": "<string>",
-                  "description": "Account context override (username or account ID)"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Page number for pagination",
                   "key": "page",
-                  "value": "1",
-                  "description": "Page number for pagination"
+                  "value": "1"
                 },
                 {
-                  "disabled": false,
+                  "description": "Number of items per page",
                   "key": "per_page",
-                  "value": "20",
-                  "description": "Number of items per page"
+                  "value": "20"
                 }
-              ],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Retrieve a paginated list of all packages in the account."
           },
           "response": [
             {
-              "id": "e42080af-ae71-411c-9ef3-52445d9a6f89",
+              "id": "f2724f00-abfd-4aa7-adae-9c0754da42c1",
               "name": "Paginated list of packages",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "packages"
-                  ],
+                  "raw": "{{baseUrl}}/packages?as=<string>&page=1&per_page=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "packages"
+                  ],
                   "query": [
                     {
+                      "description": "Account context override (username or account ID)",
                       "key": "as",
-                      "value": "nickfury"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Page number for pagination",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of items per page",
                       "key": "per_page",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"packages\": [\n    {\n      \"id\": \"pkg_eb3c12\",\n      \"name\": \"express\",\n      \"kind_key\": \"js\",\n      \"private\": true,\n      \"version_count\": 5,\n      \"release_version\": \"4.18.2\",\n      \"latest_version\": \"4.18.2\"\n    }\n  ],\n  \"total\": 1,\n  \"page\": 1,\n  \"per_page\": 20\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"packages\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"kind_key\": \"<string>\",\n      \"private\": \"<boolean>\",\n      \"version_count\": \"<integer>\",\n      \"release_version\": \"<string>\",\n      \"latest_version\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"kind_key\": \"<string>\",\n      \"private\": \"<boolean>\",\n      \"version_count\": \"<integer>\",\n      \"release_version\": \"<string>\",\n      \"latest_version\": \"<string>\"\n    }\n  ],\n  \"total\": \"<integer>\",\n  \"page\": \"<integer>\",\n  \"per_page\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T20:27:52.000Z",
+              "updatedAt": "2026-10-21T20:27:52.000Z",
+              "uid": "35240-f2724f00-abfd-4aa7-adae-9c0754da42c1"
             },
             {
-              "id": "feb5e586-e170-4e87-bce0-e758902e216d",
+              "id": "936910bc-c4a8-4e7c-a330-eced772b4d7b",
               "name": "Authentication required",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "packages"
-                  ],
+                  "raw": "{{baseUrl}}/packages?as=<string>&page=1&per_page=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "packages"
+                  ],
                   "query": [
                     {
+                      "description": "Account context override (username or account ID)",
                       "key": "as",
-                      "value": "nickfury"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Page number for pagination",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of items per page",
                       "key": "per_page",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Authentication required\",\n    \"type\": \"AuthException\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:27:52.000Z",
+              "updatedAt": "2026-10-21T20:27:52.000Z",
+              "uid": "35240-936910bc-c4a8-4e7c-a330-eced772b4d7b"
             },
             {
-              "id": "92c26e0e-17ea-4608-870e-2d713bcf9d2e",
+              "id": "3893e87c-cf38-4cc0-af07-96ac835b07e2",
               "name": "Insufficient permissions",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "packages"
-                  ],
+                  "raw": "{{baseUrl}}/packages?as=<string>&page=1&per_page=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "packages"
+                  ],
                   "query": [
                     {
+                      "description": "Account context override (username or account ID)",
                       "key": "as",
-                      "value": "nickfury"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Page number for pagination",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of items per page",
                       "key": "per_page",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Forbidden",
               "code": 403,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Insufficient permissions for this request\",\n    \"type\": \"ForbiddenException\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:27:52.000Z",
+              "updatedAt": "2026-10-21T20:27:52.000Z",
+              "uid": "35240-3893e87c-cf38-4cc0-af07-96ac835b07e2"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "546c6e88-e8d1-4bc4-9bc4-9b15ce53f719",
-          "name": "Retrieve Package",
-          "request": {
-            "name": "Retrieve Package",
-            "description": {
-              "content": "Retrieve details about a specific package by ID or KIND:NAME.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "packages",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "as",
-                  "value": "<string>",
-                  "description": "Account context override (username or account ID)"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "f8fc8eca-df27-4564-9e03-342ba122c5fa",
-              "name": "Package details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "packages",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"pkg_eb3c12\",\n  \"name\": \"express\",\n  \"kind_key\": \"js\",\n  \"private\": true,\n  \"version_count\": 5,\n  \"release_version\": \"4.18.2\",\n  \"latest_version\": \"4.18.2\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "84218d9f-2ab1-4d78-87f3-2784a170dfa9",
-              "name": "Authentication required",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "packages",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Authentication required\",\n    \"type\": \"AuthException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ec097dd8-3cb5-444f-80f9-89f4eb2a56c9",
-              "name": "Insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "packages",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Insufficient permissions for this request\",\n    \"type\": \"ForbiddenException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fc9cc86b-f15b-443c-93a4-2ef74d738eeb",
-              "name": "Referenced object not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "packages",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Package not found\",\n    \"type\": \"NotFoundException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "471b89fe-990b-463b-b4fa-ea0deb1f74e1",
-          "name": "Delete Package",
-          "request": {
-            "name": "Delete Package",
-            "description": {
-              "content": "Delete a package and all its versions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "packages",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "as",
-                  "value": "<string>",
-                  "description": "Account context override (username or account ID)"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "67d36742-8b81-4e8b-bb24-285c33a0a65d",
-              "name": "Package deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "packages",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "84171344-bccb-4060-a10b-d754184e49ca",
-              "name": "Authentication required",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "packages",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Authentication required\",\n    \"type\": \"AuthException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "28d02cb0-a34c-415d-bdb6-0203c6a32ecf",
-              "name": "Insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "packages",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Insufficient permissions for this request\",\n    \"type\": \"ForbiddenException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "502a5a0b-324e-41f9-a37d-d407c05577fb",
-              "name": "Referenced object not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "packages",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique package identifier or KIND:NAME format (e.g. js:express)"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Package not found\",\n    \"type\": \"NotFoundException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:27:52.000Z",
+          "updatedAt": "2026-10-21T20:27:52.000Z",
+          "uid": "35240-c64d606e-20fd-4941-83a4-e7a1d851fc77"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.fury.io/1",
-      "key": "baseUrl"
+      "id": "bc944a14-3b91-4fde-a160-08eb08b0ede6",
+      "createdAt": "2026-10-21T20:27:52.000Z",
+      "updatedAt": "2026-10-21T20:27:52.000Z",
+      "uid": "35240-bc944a14-3b91-4fde-a160-08eb08b0ede6"
     }
   ],
   "auth": {
@@ -801,17 +784,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "8faa73da-f62c-444e-8d47-2a124386490a",
-    "name": "Gemfury Developer Accounts Packages API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.\n\n\nContact Support:\n Name: Gemfury Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fury.io/1"
     }
-  }
+  ]
 }

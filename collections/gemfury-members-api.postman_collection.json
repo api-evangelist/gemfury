@@ -1,1086 +1,1081 @@
 {
+  "info": {
+    "_postman_id": "edb8ae5b-6064-4576-ba04-cbb2552c2bd4",
+    "name": "Gemfury Developer Members API",
+    "description": "REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.\n\nContact Support:\n Name: Gemfury Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:27:45.000Z",
+    "updatedAt": "2026-10-21T20:27:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-edb8ae5b-6064-4576-ba04-cbb2552c2bd4"
+  },
   "item": [
     {
-      "id": "f7202595-6ff3-4680-9b34-8f5b10c68347",
-      "name": "Members",
-      "description": {
-        "content": "Manage collaborators and members",
-        "type": "text/plain"
-      },
+      "name": "collaborations",
       "item": [
         {
-          "id": "d102afdd-ee8c-4a7c-a9b8-1daa46c6f810",
           "name": "List Collaborations",
+          "id": "c5247791-4ab2-4527-a843-b769754165e3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List Collaborations",
-            "description": {
-              "content": "Retrieve all accounts where the authenticated user is a collaborator.",
-              "type": "text/plain"
-            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/collaborations?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "collaborations"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Page number for pagination",
                   "key": "page",
-                  "value": "1",
-                  "description": "Page number for pagination"
+                  "value": "1"
                 },
                 {
-                  "disabled": false,
+                  "description": "Number of items per page",
                   "key": "per_page",
-                  "value": "20",
-                  "description": "Number of items per page"
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Retrieve all accounts where the authenticated user is a collaborator."
+          },
+          "response": [
+            {
+              "id": "78ffde3e-3565-4cca-9b6c-d8ac5bb8138a",
+              "name": "List of collaborations",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/collaborations?page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "collaborations"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number for pagination",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of items per page",
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
                 }
               ],
-              "variable": []
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"collaborations\": [\n    {\n      \"id\": \"<string>\",\n      \"username\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type_key\": \"user\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"username\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type_key\": \"org\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:27:46.000Z",
+              "updatedAt": "2026-10-21T20:27:46.000Z",
+              "uid": "35240-78ffde3e-3565-4cca-9b6c-d8ac5bb8138a"
             },
+            {
+              "id": "61f8f541-9247-48ed-b889-f4c8a2b096dd",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/collaborations?page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "collaborations"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number for pagination",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of items per page",
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:27:46.000Z",
+              "updatedAt": "2026-10-21T20:27:46.000Z",
+              "uid": "35240-61f8f541-9247-48ed-b889-f4c8a2b096dd"
+            },
+            {
+              "id": "09a87935-a6e6-4f20-b4c4-83056fa52749",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/collaborations?page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "collaborations"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number for pagination",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of items per page",
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:27:46.000Z",
+              "updatedAt": "2026-10-21T20:27:46.000Z",
+              "uid": "35240-09a87935-a6e6-4f20-b4c4-83056fa52749"
+            }
+          ],
+          "createdAt": "2026-10-21T20:27:46.000Z",
+          "updatedAt": "2026-10-21T20:27:46.000Z",
+          "uid": "35240-c5247791-4ab2-4527-a843-b769754165e3"
+        }
+      ],
+      "id": "8cb6ad9c-5e6d-4cf1-b06a-f55868909ab5",
+      "createdAt": "2026-10-21T20:27:46.000Z",
+      "updatedAt": "2026-10-21T20:27:46.000Z",
+      "uid": "35240-8cb6ad9c-5e6d-4cf1-b06a-f55868909ab5"
+    },
+    {
+      "name": "members",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Invite or Update Member",
+              "id": "75fbcb26-080d-4846-a218-b8796611f83f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/members/:id?role=pull&as=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "members",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Permission level: pull, push, or owner",
+                      "key": "role",
+                      "value": "pull"
+                    },
+                    {
+                      "description": "Account context override (username or account ID)",
+                      "key": "as",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "a34adf2d-78e3-4639-b02b-fba3583f3c9d",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Email address or username of the invitee or existing member"
+                    }
+                  ]
+                },
+                "description": "Update a membership or send an invitation email if the user is not already a member."
+              },
+              "response": [
+                {
+                  "id": "bed647dc-5a51-4b1d-b8df-0a8a4b66eb5c",
+                  "name": "Member updated or invitation sent",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/members/:id?role=pull&as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "members",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Permission level: pull, push, or owner",
+                          "key": "role",
+                          "value": "pull"
+                        },
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"username\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"role\": \"push\"\n}",
+                  "createdAt": "2026-10-21T20:27:46.000Z",
+                  "updatedAt": "2026-10-21T20:27:46.000Z",
+                  "uid": "35240-bed647dc-5a51-4b1d-b8df-0a8a4b66eb5c"
+                },
+                {
+                  "id": "002400e5-a430-45f1-be04-5eca7c931139",
+                  "name": "Bad request, usually an input error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/members/:id?role=pull&as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "members",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Permission level: pull, push, or owner",
+                          "key": "role",
+                          "value": "pull"
+                        },
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:46.000Z",
+                  "updatedAt": "2026-10-21T20:27:46.000Z",
+                  "uid": "35240-002400e5-a430-45f1-be04-5eca7c931139"
+                },
+                {
+                  "id": "5f7812c2-35ad-4054-b262-d389eda736b4",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/members/:id?role=pull&as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "members",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Permission level: pull, push, or owner",
+                          "key": "role",
+                          "value": "pull"
+                        },
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:46.000Z",
+                  "updatedAt": "2026-10-21T20:27:46.000Z",
+                  "uid": "35240-5f7812c2-35ad-4054-b262-d389eda736b4"
+                },
+                {
+                  "id": "f4c4f5db-97a5-4388-9a5c-72039d6c1a1d",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/members/:id?role=pull&as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "members",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Permission level: pull, push, or owner",
+                          "key": "role",
+                          "value": "pull"
+                        },
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:46.000Z",
+                  "updatedAt": "2026-10-21T20:27:46.000Z",
+                  "uid": "35240-f4c4f5db-97a5-4388-9a5c-72039d6c1a1d"
+                },
+                {
+                  "id": "544ef71e-7171-4ca5-b437-0b5b6fadf5e5",
+                  "name": "Referenced object not found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/members/:id?role=pull&as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "members",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Permission level: pull, push, or owner",
+                          "key": "role",
+                          "value": "pull"
+                        },
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:46.000Z",
+                  "updatedAt": "2026-10-21T20:27:46.000Z",
+                  "uid": "35240-544ef71e-7171-4ca5-b437-0b5b6fadf5e5"
+                }
+              ],
+              "createdAt": "2026-10-21T20:27:46.000Z",
+              "updatedAt": "2026-10-21T20:27:46.000Z",
+              "uid": "35240-75fbcb26-080d-4846-a218-b8796611f83f"
+            },
+            {
+              "name": "Remove Member",
+              "id": "641fbce8-9d35-4688-840f-6dfe7f200c94",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/members/:id?as=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "members",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Account context override (username or account ID)",
+                      "key": "as",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "78585143-a6d6-4913-965d-c5d3f0d26efd",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier or username of the member"
+                    }
+                  ]
+                },
+                "description": "Remove a member from the account."
+              },
+              "response": [
+                {
+                  "id": "99edb617-68fe-4d9f-8faf-d87fb4e29120",
+                  "name": "Member removed successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/members/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "members",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:27:46.000Z",
+                  "updatedAt": "2026-10-21T20:27:46.000Z",
+                  "uid": "35240-99edb617-68fe-4d9f-8faf-d87fb4e29120"
+                },
+                {
+                  "id": "18cd7b60-abed-4b56-a130-ee1bc13bb786",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/members/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "members",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:46.000Z",
+                  "updatedAt": "2026-10-21T20:27:46.000Z",
+                  "uid": "35240-18cd7b60-abed-4b56-a130-ee1bc13bb786"
+                },
+                {
+                  "id": "5b3b94c3-9690-499d-a0c5-78c08f537b99",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/members/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "members",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:46.000Z",
+                  "updatedAt": "2026-10-21T20:27:46.000Z",
+                  "uid": "35240-5b3b94c3-9690-499d-a0c5-78c08f537b99"
+                },
+                {
+                  "id": "1b14f44c-e895-4ba2-a7ad-5d93e45310f4",
+                  "name": "Referenced object not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/members/:id?as=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "members",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account context override (username or account ID)",
+                          "key": "as",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:27:46.000Z",
+                  "updatedAt": "2026-10-21T20:27:46.000Z",
+                  "uid": "35240-1b14f44c-e895-4ba2-a7ad-5d93e45310f4"
+                }
+              ],
+              "createdAt": "2026-10-21T20:27:46.000Z",
+              "updatedAt": "2026-10-21T20:27:46.000Z",
+              "uid": "35240-641fbce8-9d35-4688-840f-6dfe7f200c94"
+            }
+          ],
+          "id": "767297cd-3233-4e8e-8bf5-68266237fba3",
+          "createdAt": "2026-10-21T20:27:46.000Z",
+          "updatedAt": "2026-10-21T20:27:46.000Z",
+          "uid": "35240-767297cd-3233-4e8e-8bf5-68266237fba3"
+        },
+        {
+          "name": "List Members",
+          "id": "6ecbd535-23c9-47f6-8cfa-2b3a2ec17d8d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d6190f80-cde2-4caf-ab31-fbc59ce645d1",
-              "name": "List of collaborations",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "collaborations"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "per_page",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"collaborations\": [\n    {\n      \"id\": \"acct_eb3c12\",\n      \"username\": \"nickfury\",\n      \"name\": \"Nick Fury\",\n      \"type_key\": \"user\"\n    },\n    {\n      \"id\": \"acct_eb3c12\",\n      \"username\": \"nickfury\",\n      \"name\": \"Nick Fury\",\n      \"type_key\": \"user\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "70c07dd7-faf7-4f80-91c2-0cf5147ad23e",
-              "name": "Authentication required",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "collaborations"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "per_page",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Authentication required\",\n    \"type\": \"AuthException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1a54946c-9719-458d-80d4-4a68cb451e31",
-              "name": "Insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "collaborations"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "per_page",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Insufficient permissions for this request\",\n    \"type\": \"ForbiddenException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4cb8638b-ce19-4231-a1fa-070c1a4f4bec",
-          "name": "List Members",
-          "request": {
-            "name": "List Members",
-            "description": {
-              "content": "Retrieve a list of members (collaborators) for the account.",
-              "type": "text/plain"
-            },
             "url": {
+              "raw": "{{baseUrl}}/members?as=<string>&page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "members"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Account context override (username or account ID)",
                   "key": "as",
-                  "value": "<string>",
-                  "description": "Account context override (username or account ID)"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Page number for pagination",
                   "key": "page",
-                  "value": "1",
-                  "description": "Page number for pagination"
+                  "value": "1"
                 },
                 {
-                  "disabled": false,
+                  "description": "Number of items per page",
                   "key": "per_page",
-                  "value": "20",
-                  "description": "Number of items per page"
+                  "value": "20"
                 }
-              ],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Retrieve a list of members (collaborators) for the account."
           },
           "response": [
             {
-              "id": "24db880b-17fb-46e6-92ef-c19e17b8cea8",
+              "id": "295f65ea-2cb7-4207-9aba-8b58c75891cf",
               "name": "List of members",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "members"
-                  ],
+                  "raw": "{{baseUrl}}/members?as=<string>&page=1&per_page=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "members"
+                  ],
                   "query": [
                     {
+                      "description": "Account context override (username or account ID)",
                       "key": "as",
-                      "value": "nickfury"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Page number for pagination",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of items per page",
                       "key": "per_page",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"members\": [\n    {\n      \"id\": \"acct_eb3c12\",\n      \"username\": \"collab-name\",\n      \"name\": \"Jane Doe\",\n      \"email\": \"jane@example.com\",\n      \"role\": \"push\"\n    },\n    {\n      \"id\": \"acct_eb3c12\",\n      \"username\": \"collab-name\",\n      \"name\": \"Jane Doe\",\n      \"email\": \"jane@example.com\",\n      \"role\": \"push\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"members\": [\n    {\n      \"id\": \"<string>\",\n      \"username\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"role\": \"push\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"username\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"role\": \"push\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:27:46.000Z",
+              "updatedAt": "2026-10-21T20:27:46.000Z",
+              "uid": "35240-295f65ea-2cb7-4207-9aba-8b58c75891cf"
             },
             {
-              "id": "92081339-c9de-4e53-90c0-a3d335d7a9c4",
+              "id": "c075bf21-d56c-426b-86bc-3c403b0bd7cd",
               "name": "Authentication required",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "members"
-                  ],
+                  "raw": "{{baseUrl}}/members?as=<string>&page=1&per_page=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "members"
+                  ],
                   "query": [
                     {
+                      "description": "Account context override (username or account ID)",
                       "key": "as",
-                      "value": "nickfury"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Page number for pagination",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of items per page",
                       "key": "per_page",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Authentication required\",\n    \"type\": \"AuthException\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:27:46.000Z",
+              "updatedAt": "2026-10-21T20:27:46.000Z",
+              "uid": "35240-c075bf21-d56c-426b-86bc-3c403b0bd7cd"
             },
             {
-              "id": "aeb2fd89-9720-4433-9f61-3af0d8f99851",
+              "id": "f8a73f9e-3f03-4830-a022-570f63f807c7",
               "name": "Insufficient permissions",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "members"
-                  ],
+                  "raw": "{{baseUrl}}/members?as=<string>&page=1&per_page=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "members"
+                  ],
                   "query": [
                     {
+                      "description": "Account context override (username or account ID)",
                       "key": "as",
-                      "value": "nickfury"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Page number for pagination",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of items per page",
                       "key": "per_page",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Forbidden",
               "code": 403,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Insufficient permissions for this request\",\n    \"type\": \"ForbiddenException\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:27:46.000Z",
+              "updatedAt": "2026-10-21T20:27:46.000Z",
+              "uid": "35240-f8a73f9e-3f03-4830-a022-570f63f807c7"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "bb16f287-5fca-4c48-b61c-51f151f0cbcc",
-          "name": "Invite or Update Member",
-          "request": {
-            "name": "Invite or Update Member",
-            "description": {
-              "content": "Update a membership or send an invitation email if the user is not already a member.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "members",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "role",
-                  "value": "<string>",
-                  "description": "(Required) Permission level: pull, push, or owner"
-                },
-                {
-                  "disabled": false,
-                  "key": "as",
-                  "value": "<string>",
-                  "description": "Account context override (username or account ID)"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Email address or username of the invitee or existing member"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "34e3ff25-54d5-4b0d-afa7-241afd2dd317",
-              "name": "Member updated or invitation sent",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "members",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "role",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Email address or username of the invitee or existing member"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"acct_eb3c12\",\n  \"username\": \"collab-name\",\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane@example.com\",\n  \"role\": \"push\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d74243c2-34a4-48eb-adbd-543bfb1b4294",
-              "name": "Bad request, usually an input error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "members",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "role",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Email address or username of the invitee or existing member"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Invalid kind_key value\",\n    \"type\": \"InputException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2b298379-c4eb-4e2d-b90f-57064cb12971",
-              "name": "Authentication required",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "members",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "role",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Email address or username of the invitee or existing member"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Authentication required\",\n    \"type\": \"AuthException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1eef25e0-33d1-40b1-a813-c11f1261f200",
-              "name": "Insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "members",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "role",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Email address or username of the invitee or existing member"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Insufficient permissions for this request\",\n    \"type\": \"ForbiddenException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5484b9c1-62ff-4d0f-836b-8969d2746d7c",
-              "name": "Referenced object not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "members",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "role",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Email address or username of the invitee or existing member"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Package not found\",\n    \"type\": \"NotFoundException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "21d080c2-48dd-4a3e-ba5e-808f52bbe779",
-          "name": "Remove Member",
-          "request": {
-            "name": "Remove Member",
-            "description": {
-              "content": "Remove a member from the account.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "members",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "as",
-                  "value": "<string>",
-                  "description": "Account context override (username or account ID)"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier or username of the member"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "dea447a3-4585-438b-97b4-8d7f09ac446c",
-              "name": "Member removed successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "members",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier or username of the member"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0d9ce882-0925-47de-a73d-81cac5ec5409",
-              "name": "Authentication required",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "members",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier or username of the member"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Authentication required\",\n    \"type\": \"AuthException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "17da1458-b147-4c62-ada0-6d91230232e3",
-              "name": "Insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "members",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier or username of the member"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Insufficient permissions for this request\",\n    \"type\": \"ForbiddenException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cfc1a930-0b48-4510-bbca-37f3ef61268e",
-              "name": "Referenced object not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "members",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "as",
-                      "value": "nickfury"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier or username of the member"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"message\": \"Package not found\",\n    \"type\": \"NotFoundException\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:27:46.000Z",
+          "updatedAt": "2026-10-21T20:27:46.000Z",
+          "uid": "35240-6ecbd535-23c9-47f6-8cfa-2b3a2ec17d8d"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.fury.io/1",
-      "key": "baseUrl"
+      "id": "9deb5106-e8bf-46e8-9e5d-453b3a794012",
+      "createdAt": "2026-10-21T20:27:46.000Z",
+      "updatedAt": "2026-10-21T20:27:46.000Z",
+      "uid": "35240-9deb5106-e8bf-46e8-9e5d-453b3a794012"
     }
   ],
   "auth": {
@@ -1088,17 +1083,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e3fe1357-1405-4117-ad3f-c40ea6c40e1e",
-    "name": "Gemfury Developer Accounts Members API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for managing packages, versions, accounts, members, and tokens hosted on Gemfury. Supports GET, POST, PATCH, PUT, and DELETE methods over HTTPS with JSON payloads.\n\n\nContact Support:\n Name: Gemfury Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fury.io/1"
     }
-  }
+  ]
 }
